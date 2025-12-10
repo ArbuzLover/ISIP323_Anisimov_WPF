@@ -24,5 +24,26 @@ namespace ISIP323_Anisimov_WPF
         {
             InitializeComponent();
         }
+
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame.CanGoBack)
+            {
+                MainFrame.GoBack();
+            }
+        }
+
+        private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
+        {
+            BackButton.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
+
+            if (e.Content is Page page)
+            {
+                TitleLabel.Content = page.Title;
+            }
+        }
+
+
     }
 }

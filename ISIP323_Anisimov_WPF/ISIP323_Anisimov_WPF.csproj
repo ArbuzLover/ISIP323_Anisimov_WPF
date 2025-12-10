@@ -55,20 +55,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Pages\Step5.xaml.cs">
-      <DependentUpon>Step5.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Step4.xaml.cs">
-      <DependentUpon>Step4.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Step3.xaml.cs">
-      <DependentUpon>Step3.xaml</DependentUpon>
+    <Compile Include="Pages\Step1.xaml.cs">
+      <DependentUpon>Step1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Step2.xaml.cs">
       <DependentUpon>Step2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Step1.xaml.cs">
-      <DependentUpon>Step1.xaml</DependentUpon>
+    <Compile Include="Pages\Step3.xaml.cs">
+      <DependentUpon>Step3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Step4.xaml.cs">
+      <DependentUpon>Step4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Step5.xaml.cs">
+      <DependentUpon>Step5.xaml</DependentUpon>
     </Compile>
     <Compile Include="Zakaz.cs" />
     <Page Include="MainWindow.xaml">
@@ -83,23 +83,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\Step5.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Pages\Step1.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\Step4.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\Step3.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Step2.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Step1.xaml">
+    <Page Include="Pages\Step3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Step4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Step5.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,6 +129,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\image1.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

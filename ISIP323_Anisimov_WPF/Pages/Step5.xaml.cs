@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ISIP323_Anisimov_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Step1.xaml
+    /// Логика взаимодействия для Step5.xaml
     /// </summary>
-    public partial class Step1 : Page
+    public partial class Step5 : Page
     {
-        public Step1()
+        public Step5()
         {
             InitializeComponent();
         }
