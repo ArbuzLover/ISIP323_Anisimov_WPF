@@ -37,13 +37,10 @@ namespace ISIP323_Anisimov_WPF
         private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             BackButton.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
-
-            if (e.Content is Page page)
-            {
-                TitleLabel.Content = page.Title;
-            }
+            SumLabel.Content = "Итого: " + Zakaz.sum;
+            Progress.Value = Progress.Value + 20;
         }
-
+       
 
     }
 }

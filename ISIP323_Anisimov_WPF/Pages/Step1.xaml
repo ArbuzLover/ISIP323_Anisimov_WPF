@@ -23,29 +23,45 @@
                     <ColumnDefinition Width="0.25*"/>
                 </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Margin="5,0,5,0">
-                    <Image  Source="/Images/image1.jpg"/>
-                    <RadioButton Content="Машина 1" HorizontalAlignment="Center" GroupName="ModelButton" FontSize="16"/>
+                    <Image  Source="/Images/image1.jpg" x:Name="Image1"/>
+                <RadioButton Content="Горелая 50000$" HorizontalAlignment="Center" GroupName="ModelButton" FontSize="16" Checked="ModelButton1_Checked" x:Name="ModelButton1"/>
                 </StackPanel>
 
             <StackPanel Grid.Column="1" Margin="5,0,5,0">
-                    <Image Source="/Images/image1.jpg"/>
-                <RadioButton Content="Машина 2" HorizontalAlignment="Center" GroupName="ModelButton" FontSize="16"/>
+                <Image Source="/Images/image2.jpeg" x:Name="Image2"/>
+                <RadioButton Content="Свиновоз 30000$" HorizontalAlignment="Center" GroupName="ModelButton" FontSize="16" x:Name="ModelButton2" Checked="ModelButton2_Checked" />
                 </StackPanel>
 
             <StackPanel Grid.Column="2" Margin="5,0,5,0">
-                    <Image  Source="/Images/image1.jpg"/>
-                <RadioButton Content="Машина 3" HorizontalAlignment="Center" GroupName="ModelButton" FontSize="16"/>
+                <Image  Source="/Images/image1.jpg" x:Name="Image3"/>
+                <RadioButton Content="ХЗ КАКАЯ ПОКА 7000" HorizontalAlignment="Center" GroupName="ModelButton" FontSize="16" x:Name="ModelButton3" Checked="ModelButton3_Checked"  />
                 </StackPanel>
 
             <StackPanel Grid.Column="3" Margin="5,0,5,0">
-                    <Image  Source="/Images/image1.jpg"/>
-                <RadioButton Content="Машина 4" HorizontalAlignment="Center" GroupName="ModelButton" FontSize="16"/>
+                <Image  Source="/Images/image1.jpg" x:Name="Image4"/>
+                <RadioButton Content="ХЗ КАКАЯ ПОКА 4000" HorizontalAlignment="Center" GroupName="ModelButton" FontSize="16" x:Name="ModelButton4" Checked="ModelButton4_Checked"/>
                 </StackPanel>
                 
             </Grid>
 
-        
-        
-        
-    </Grid>
+        <Grid Margin="10" Grid.Row="1" Visibility="Collapsed" x:Name="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*" />
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="BigImage"/>
+            <StackPanel Grid.Column="1">
+                <ListBox  Height="100" Width="250" SelectionChanged="ListBox_SelectionChanged">
+                <ListBoxItem x:Name="ListBoxItem1"> Гавно движок </ListBoxItem>
+                <ListBoxItem x:Name="ListBoxItem2">Нормуль движок</ListBoxItem>
+                <ListBoxItem x:Name="ListBoxItem3" >Имба движок</ListBoxItem>
+                <ListBoxItem x:Name="ListBoxItem4" >Про движок</ListBoxItem>
+                    <ListBoxItem x:Name="ListBoxItem5">Хакер движок</ListBoxItem>
+                </ListBox>
+                <Label x:Name="tb" Content="Вы выбрали: "/>
+            </StackPanel>
+            <Button Content="Продолжить" Background="LightGreen" VerticalAlignment="Bottom" Grid.Column="1" Height="30" Click="ToStep2Button_Click" Name="ToStep2Button" Visibility="Collapsed"/>
+        </Grid>
+                
+        </Grid>
 </Page>
