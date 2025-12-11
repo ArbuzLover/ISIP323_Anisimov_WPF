@@ -11,10 +11,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel  HorizontalAlignment="Center" Orientation="Horizontal">
-            <Label Content="ХЗ ДЛЯ ТЕКСТА" x:Name="TitleLabel" />
-            <Button Content="Вернуться назад" x:Name="BackButton" Click="BackButton_OnClick" Width="100" Height="20" />
-        </StackPanel>
-        <Frame x:Name="MainFrame" Grid.Row="1"  Source="Pages/Step1.xaml" NavigationUIVisibility="Hidden" Navigated="MainFrame_OnNavigated"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.33*"/>
+            <ColumnDefinition Width="0.33*"/>
+            <ColumnDefinition Width="0.33*"/>
+        </Grid.ColumnDefinitions>
+            <Button Content="Вернуться назад" x:Name="BackButton" Click="BackButton_OnClick" Width="100" Height="20" HorizontalAlignment="Left" />
+        <Label Content="ХЗ ДЛЯ ТЕКСТА" x:Name="TitleLabel" Grid.Column="1" HorizontalAlignment="Center"/>
+        <Label Content="Итого: " Grid.Column="22" HorizontalAlignment="Right"/>
+        <Frame x:Name="MainFrame" Grid.Row="1" Grid.ColumnSpan="3" Source="Pages/Step1.xaml" NavigationUIVisibility="Hidden" Navigated="MainFrame_OnNavigated"/>
     </Grid>
 </Window>
