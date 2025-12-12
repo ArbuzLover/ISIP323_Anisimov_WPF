@@ -75,6 +75,7 @@ namespace ISIP323_Anisimov_WPF.Pages
             Zakaz.sum += Zakaz.C;
         }
 
+
         private void ToStep2Button_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Step2());
