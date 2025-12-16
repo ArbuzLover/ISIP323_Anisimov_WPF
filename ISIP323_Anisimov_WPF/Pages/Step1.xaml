@@ -60,7 +60,7 @@
                 </ListBox>
                 <Label x:Name="tb" Content="Вы выбрали: "/>
             </StackPanel>
-            <Button Content="Продолжить" Background="LightGreen" VerticalAlignment="Bottom" Grid.Column="1" Height="30" Click="ToStep2Button_Click" Name="ToStep2Button" Visibility="Collapsed"/>
+            <Button Content="Продолжить" Background="LightGreen" VerticalAlignment="Bottom" Grid.Column="1" Height="30" Click="ToStepButton_Click" Name="ToStepButton" Visibility="Collapsed"/>
         </Grid>
                 
         </Grid>

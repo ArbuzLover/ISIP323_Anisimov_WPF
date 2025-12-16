@@ -29,9 +29,10 @@ namespace ISIP323_Anisimov_WPF.Pages
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListBoxItem choice = ((sender as ListBox).SelectedItem as ListBoxItem);
-            tb.Content = "Вы выбрали: " + choice.Content.ToString() + ".";
+            tb.Content = "Вы выбрали: " + choice.Content.ToString();
             Zakaz.engine = choice.Content.ToString();
-            ToStep2Button.Visibility = Visibility.Visible;
+            //Zakaz.sum = +Convert.ToInt32(Zakaz.engine);
+            ToStepButton.Visibility = Visibility.Visible;
 
 
 
@@ -45,6 +46,7 @@ namespace ISIP323_Anisimov_WPF.Pages
             Bottom.Visibility = Visibility.Visible;
 
             Zakaz.sum += Zakaz.C;
+            ListBoxItem1.Content = ListBoxItem1.Content + "(1000)";
             
         }
 
@@ -76,7 +78,7 @@ namespace ISIP323_Anisimov_WPF.Pages
         }
 
 
-        private void ToStep2Button_Click(object sender, RoutedEventArgs e)
+        private void ToStepButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Step2());
             

@@ -23,22 +23,29 @@ namespace ISIP323_Anisimov_WPF
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
+       
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (MainFrame.CanGoBack)
             {
                 MainFrame.GoBack();
+                
+                Progress.Value -=200;
             }
         }
-
+        int i = 1;
         private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             BackButton.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
             SumLabel.Content = "Итого: " + Zakaz.sum;
-            Progress.Value = Progress.Value + 20;
+            if (i == 1) {Progress.Value = 0; i++; }
+            else Progress.Value += 20;
+ 
+            
         }
        
 
