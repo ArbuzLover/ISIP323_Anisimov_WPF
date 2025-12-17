@@ -32,7 +32,7 @@ namespace ISIP323_Anisimov_WPF.Pages
             tb.Content = "Вы выбрали: " + choice.Content.ToString();
             Zakaz.engine = choice.Content.ToString();
             //Zakaz.sum = +Convert.ToInt32(Zakaz.engine);
-            ToStepButton.Visibility = Visibility.Visible;
+            //ToStepButton.Visibility = Visibility.Visible;
             if (choice == ListBoxItem1) Zakaz.sum -= 1000;
             else if (choice == ListBoxItem2) Zakaz.sum += 0;
             else if (choice == ListBoxItem3) Zakaz.sum += 1000;
