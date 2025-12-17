@@ -24,5 +24,21 @@ namespace ISIP323_Anisimov_WPF.Pages
         {
             InitializeComponent();
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            ListBoxItem choice = ((sender as ListBox).SelectedItem as ListBoxItem);
+            tb.Content = "Вы выбрали: " + choice.Content.ToString();
+            Zakaz.engine = choice.Content.ToString();
+            //Zakaz.sum = +Convert.ToInt32(Zakaz.engine);
+            ToStepButton.Visibility = Visibility.Visible;
+            if (choice == ListBoxItem1) Zakaz.sum -= 1000;
+            else if (choice == ListBoxItem2) Zakaz.sum += 0;
+            else if (choice == ListBoxItem3) Zakaz.sum += 1000;
+            else if (choice == ListBoxItem4) Zakaz.sum += 2000;
+            else if (choice == ListBoxItem5) Zakaz.sum += 10000;
+      
+        }
     }
 }

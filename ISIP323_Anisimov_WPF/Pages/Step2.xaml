@@ -6,9 +6,22 @@
       xmlns:local="clr-namespace:ISIP323_Anisimov_WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Step2">
+      Title="Step2" Background="#FFB1ADAD">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5"/>
+            <ColumnDefinition Width="0.5"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <ListBox  Height="100" Width="400" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="ListBox_SelectionChanged">
+                <ListBoxItem x:Name="ListBoxItem1" Background="White">Белый</ListBoxItem>
+                <ListBoxItem x:Name="ListBoxItem2" Background="Blue">Красный</ListBoxItem>
+                <ListBoxItem x:Name="ListBoxItem3" Background="Red">Белый</ListBoxItem>
+                <ListBoxItem x:Name="ListBoxItem4" Background="Blue">Синий</ListBoxItem>
+                <ListBoxItem x:Name="ListBoxItem5" Background="Yellow">Жёлтый</ListBoxItem>
+            </ListBox>
+            <Label x:Name="tb" Content="Вы выбрали: " HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Page>
