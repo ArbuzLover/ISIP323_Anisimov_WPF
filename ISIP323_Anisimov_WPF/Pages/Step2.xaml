@@ -16,14 +16,28 @@
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
-        <ListBox  Height="100" Width="400" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" SelectionChanged="ListBox_SelectionChanged">
-            <ListBoxItem x:Name="ListBoxItem1" Background="White">Белый</ListBoxItem>
-                <ListBoxItem x:Name="ListBoxItem2" Background="Blue">Синий</ListBoxItem>
-                <ListBoxItem x:Name="ListBoxItem3" Background="Red">Красный</ListBoxItem>
-            <ListBoxItem x:Name="ListBoxItem4" Background="Blue">Синий</ListBoxItem>
-            <ListBoxItem x:Name="ListBoxItem5" Background="Yellow">Жёлтый</ListBoxItem>
-        </ListBox>
-        <Label x:Name="tb" Content="Вы выбрали: " HorizontalAlignment="Center"/>
+            <ListBox  Height="100" Width="400" FontSize="20" SelectionChanged="ListBox_SelectionChanged">
+                <ListBoxItem x:Name="ListBoxItem1" Background="White" Content="Белый(+0)"/>
+                <ListBoxItem x:Name="ListBoxItem2" Background="Blue" Content="Синий(+1000$)"/>
+                <ListBoxItem x:Name="ListBoxItem3" Background="Red" Content="Красный(+2000$)"/>
+                <ListBoxItem x:Name="ListBoxItem4" Background="Blue" Content="Синій(+100₴)"/>
+                <ListBoxItem x:Name="ListBoxItem5" Background="Yellow" Content="Жовтий(+100₴)"/>
+            </ListBox>
+            <Label x:Name="tb" Content="Вы выбрали: " HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+            <TextBlock Text="Дополнительные опции:" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <CheckBox x:Name="Option1" Content="Кожаный салон (+150)" Margin="5"/>
+            <CheckBox x:Name="Option2" Content="Панорамная крыша (+200)" Margin="5"/>
+            <CheckBox x:Name="Option3" Content="Подогрев сидений (+50)" Margin="5"/>
+            <CheckBox x:Name="Option4" Content="Мигалка (+75)" Margin="5"/>
+            <CheckBox x:Name="Option5" Content="Пушки (+40)" Margin="5"/>
+            <CheckBox x:Name="Option6" Content="Камера заднего вида (+30)" Margin="5"/>
+            <CheckBox x:Name="Option7" Content="Дилдо под сидениями (+1000000)" Margin="5"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" >
+                <Button x:Name="NextButton" Content="Далее" Width="200" Height="45" Margin="5" Background="Green" Foreground="White"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

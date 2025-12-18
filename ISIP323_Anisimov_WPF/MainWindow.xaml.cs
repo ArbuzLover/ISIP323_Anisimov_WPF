@@ -33,7 +33,7 @@ namespace ISIP323_Anisimov_WPF
             if (MainFrame.CanGoBack)
             {
                 MainFrame.GoBack();
-                
+                i--;
                 Progress.Value -=200;
             }
         }
@@ -41,7 +41,7 @@ namespace ISIP323_Anisimov_WPF
         private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             BackButton.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
-            SumLabel.Content = "Итого: " + Zakaz.sum;
+            //SumLabel.Content = "Итого: " + Zakaz.sum;
             if (i == 1) {Progress.Value = 0; i++; }
             else Progress.Value += 20;
  

@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
             <Button Content="Вернуться назад" x:Name="BackButton" Click="BackButton_OnClick" Width="100" Height="20" HorizontalAlignment="Left" />
         <ProgressBar Height="20" x:Name="Progress" VerticalAlignment="Top" Width="100" Grid.Column="1" HorizontalAlignment="Center" Minimum="0" Maximum="100" Value="0"/>
-        <Label Content="Итого: " Grid.Column="2" HorizontalAlignment="Right" x:Name="SumLabel"/>
+        <!--<Label Content="Итого: " Grid.Column="2" HorizontalAlignment="Right" x:Name="SumLabel"/>-->
         <Frame x:Name="MainFrame" Grid.Row="1" Grid.ColumnSpan="3" Source="Pages/Step1.xaml" NavigationUIVisibility="Hidden" Navigated="MainFrame_OnNavigated"/>
         
 
