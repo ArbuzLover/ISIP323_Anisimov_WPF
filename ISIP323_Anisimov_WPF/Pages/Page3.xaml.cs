@@ -13,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ISIP323_Anisimov_WPF
+namespace ISIP323_Anisimov_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Page3.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Page3 : Page
     {
-        public MainWindow()
+        public Page3()
         {
             InitializeComponent();
-            
         }
-        
     }
 }

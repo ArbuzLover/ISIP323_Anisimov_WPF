@@ -13,17 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ISIP323_Anisimov_WPF
+namespace ISIP323_Anisimov_WPF.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для Page2.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Page2 : Page
     {
-        public MainWindow()
+        List <Product> Basket = new Product();
+        public Page2(List <Product> basket)
         {
             InitializeComponent();
-            
+            basket = Basket;
+
         }
         
     }
