@@ -9,6 +9,7 @@
       Title="Page2" Background="#FFA9A8A8">
 
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock Text="Ваша корзина:" x:Name="BasketTextBlock"></TextBlock>
+        <TextBlock Text="Ваша корзина:" x:Name="BasketTextBlock"/>
+        <Button Content="Перейти к оформлению" x:Name="Page3Button" Click="Page3Button_Click" />
     </StackPanel>
 </Page>

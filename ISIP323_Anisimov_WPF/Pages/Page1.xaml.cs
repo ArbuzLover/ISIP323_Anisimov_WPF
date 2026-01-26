@@ -24,36 +24,44 @@ namespace ISIP323_Anisimov_WPF.Pages
         public Page1()
         {
             InitializeComponent();
-            Product1Image.Source = new BitmapImage(new Uri(products., UriKind.Relative));
-
+            IntializeSetku();
         }
 
-        public static List<Product> products = Core.Context.Product.ToList();
-        public static List<Product> Basket;
+        public void IntializeSetku()
+        {
+            Product1Image.Source = new BitmapImage(new Uri(GetPath(products, 1), UriKind.Relative));
+            Product1Name.Text = GetName(products, 1);
+            Product1Price.Text = GetPrice(products, 1);
 
+            Product2Image.Source = new BitmapImage(new Uri(GetPath(products, 2), UriKind.Relative));
+            Product2Name.Text = GetName(products, 2);
+            Product2Price.Text = GetPrice(products, 2);
+
+
+            Product3Image.Source = new BitmapImage(new Uri(GetPath(products, 3), UriKind.Relative));
+            Product3Name.Text = GetName(products, 3);
+            Product3Price.Text = GetPrice(products, 3);
+        }
+
+
+        public static List<Product> products = Core.Context.Product.ToList();
+        public static List<Product> Basket = new List<Product>();
+                
         private void Product1ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var item in products)
-            {
-                if(item.ID == 1) { Basket.Add(item); }
-            }
-            
+            AddToBasket(products, Basket,1);
+
+
         }
 
         private void Product2ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var item in products)
-            {
-                if (item.ID == 2) { Basket.Add(item); }
-            }
+            AddToBasket(products, Basket,2);
         }
 
         private void Product3ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var item in products)
-            {
-                if (item.ID == 3) { Basket.Add(item); }
-            }
+            AddToBasket(products, Basket,3);
         }
         
 
@@ -63,10 +71,51 @@ namespace ISIP323_Anisimov_WPF.Pages
         }
 
 
-        string GetPath(List <Product> product)
+        private string GetPath(List<Product> product, int id)
         {
+            foreach (var item in product)
+            {
+                if (id == item.ID) { return item.Path.ToString(); }
+            }
+            return "";
+            
+        }
 
-            return pr;
+        string GetName(List<Product> product, int id)
+        {
+            foreach (var item in product)
+            {
+                if (id == item.ID) { return item.Name; }
+               
+            }
+            return "";
+        }
+
+
+        string GetPrice(List<Product> product, int id)
+        {
+            foreach (var item in product)
+            {
+                if (id == item.ID) { return item.Price.ToString(); }
+
+            }
+            return "";
+        }
+
+
+        void AddToBasket(List<Product> products, List<Product> Basket, int id) 
+        {
+            Product newProduct = new Product();
+            foreach (var item in products)
+            {
+                if (item.ID == id)
+                {
+                    newProduct.ID = item.ID;
+                    newProduct.Name = item.Name;
+                    newProduct.Price = item.Price;
+                    Basket.Add(newProduct);
+                }
+            }
         }
     }
 }

@@ -150,7 +150,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="OnlineShopPr13Entities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="OnlineShopPr13Entities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="OrderProducts" EntityType="Self.OrderProducts" />
           <EntitySet Name="Product" EntityType="Self.Product" />
@@ -169,7 +169,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище OnlineShopPr13ModelContainer" CdmEntityContainer="OnlineShopPr13Entities2">
+        <EntityContainerMapping StorageEntityContainer="Хранилище OnlineShopPr13ModelContainer" CdmEntityContainer="OnlineShopPr13Entities3">
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="OnlineShopPr13Model.Order">
               <MappingFragment StoreEntitySet="Order">

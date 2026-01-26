@@ -20,7 +20,7 @@ namespace ISIP323_Anisimov_WPF.Pages
     /// </summary>
     public partial class Page3 : Page
     {
-        public Page3()
+        public Page3(List<Product> basket)
         {
             InitializeComponent();
         }

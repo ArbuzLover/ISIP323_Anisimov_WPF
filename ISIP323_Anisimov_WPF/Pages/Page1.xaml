@@ -15,36 +15,40 @@
             <ColumnDefinition Width="33*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
         
         
         
-        <StackPanel Grid.Column="0">
-            <Image x:Name="Product1Image"/>
-            <TextBlock Text="Товар" x:Name="Product1Name"/>
-            <TextBlock Text="Цена" x:Name="Product1Price"/>
-            <Button Content="Добавить" x:Name="Product1ButtonAdd" Click="Product1ButtonAdd_Click"/>
+        
+            <Image x:Name="Product1Image" />
+        <StackPanel Grid.Column="0" Grid.Row="1" >
+            <TextBlock Text="Товар" x:Name="Product1Name" HorizontalAlignment="Center"/>
+            <TextBlock Text="Цена" x:Name="Product1Price" HorizontalAlignment="Center"/>
+            <Button Content="Добавить" x:Name="Product1ButtonAdd" Click="Product1ButtonAdd_Click" Grid.Row="1"/>
         </StackPanel>
 
 
-        <StackPanel Grid.Column="1">
-            <Image x:Name="Product2Image"/>
-            <TextBlock Text="Товар" x:Name="Product2Name"/>
-            <TextBlock Text="Цена" x:Name="Product2Price"/>
-            <Button Content="Добавить" x:Name="Product2ButtonAdd" Click="Product2ButtonAdd_Click"/>
+            
+            <Image x:Name="Product2Image" Grid.Column="1"/>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Товар" x:Name="Product2Name" HorizontalAlignment="Center"/>
+            <TextBlock Text="Цена" x:Name="Product2Price" HorizontalAlignment="Center"/>
+            <Button Content="Добавить" x:Name="Product2ButtonAdd" Click="Product2ButtonAdd_Click" Grid.Row="1"/>
         </StackPanel>
 
 
-        <StackPanel Grid.Column="2">
-            <Image x:Name="Product3Image"/>
-            <TextBlock Text="Товар" x:Name="Product3Name"/>
-            <TextBlock Text="Цена" x:Name="Product3Price"/>
-            <Button Content="Добавить" x:Name="Product3ButtonAdd" Click="Product3ButtonAdd_Click"/>
+        
+            <Image x:Name="Product3Image"   Grid.Column="2" />
+        <StackPanel Grid.Column="2" Grid.Row="1">
+            <TextBlock Text="Товар" x:Name="Product3Name" HorizontalAlignment="Center"/>
+            <TextBlock Text="Цена" x:Name="Product3Price" HorizontalAlignment="Center"/>
+            <Button Content="Добавить" x:Name="Product3ButtonAdd" Click="Product3ButtonAdd_Click" />
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20">
             <Button Content="Перейти к заказу" x:Name="Page2Button" Click="Page2Button_Click"/>
         </StackPanel>
         

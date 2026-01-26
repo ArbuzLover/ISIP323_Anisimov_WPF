@@ -20,13 +20,29 @@ namespace ISIP323_Anisimov_WPF.Pages
     /// </summary>
     public partial class Page2 : Page
     {
-        List <Product> Basket = new Product();
+        List<Product> Basket;
         public Page2(List <Product> basket)
         {
             InitializeComponent();
-            basket = Basket;
-
+            Basket = basket;
+            IntializeZakaz(Basket);
         }
-        
+
+        void IntializeZakaz(List<Product> Basket)
+        {
+            string zakaz ="";
+            
+            foreach (var item in Basket)
+            {
+                zakaz += $"{item.Name} {item.Price} | ";
+
+            }
+            BasketTextBlock.Text = "Ваш заказ: " + zakaz;
+        }
+
+        private void Page3Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Page3(Basket));
+        }
     }
 }
