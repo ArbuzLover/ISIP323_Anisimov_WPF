@@ -45,39 +45,61 @@ namespace ISIP323_Anisimov_WPF.Pages
         {
             Name = NameUser.Text;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Basket.Count > 0 & Name.Length > 0 & Email.Length > 0 & Address.Length > 0) 
+            {
+               /* Order NewOrder = new Order()
+                {
+                    FIO = Name,
+                    Email = Email,
+                    Address = Address
+                    
+                };
+                Core.Context.Order.Add(NewOrder);
+                Core.Context.SaveChanges(); */
+                MessageBox.Show("Заказ оформлен!");
+            }
+            else { MessageBox.Show("Заполнены не все данные!!"); }
+        }
+
         int countProducts1 = 0, countProducts2 = 0, countProducts3 = 0;
-        bool iter1 = true, iter2 = true, iter3 = true;
+        
         void TextZakaz()
         {
+            bool iter1 = true, iter2 = true, iter3 = true;
+            int sum = 0;
             string zakaz = $"";
             foreach (var item in Basket)
             {
                 if (item.ID == 1) 
                 { 
                     countProducts1++;
-                    if (iter1) { Product1.Content = $"{item.Name} за {item.Price} "; iter1 = false; }
+                    if (iter1) { Product1.Text = $"{item.Name} за {item.Price} "; iter1 = false; }
                 }
                 else if (item.ID == 2) 
                 { 
                     countProducts2++;
-                    if (iter2) { Product2.Content = $"{item.Name} за {item.Price} "; iter2 = false; }
+                    if (iter2) { Product2.Text = $"{item.Name} за {item.Price} "; iter2 = false; }
                 }
                 else if (item.ID == 3) 
                 { 
                     countProducts3++;
-                    if (iter3) { Product1.Content = $"{item.Name} за {item.Price} "; iter3 = false; }
+                    if (iter3) { Product3.Text = $"{item.Name} за {item.Price} "; iter3 = false; }
                 }
+                sum += item.Price;
 
             }
-            Product1.Content += $"{countProducts1}";
-            Product2.Content += $"{countProducts2}";
-            Product3.Content += $"{countProducts3}";
+            Product1.Text += $"{countProducts1} шт";
+            Product2.Text += $"{countProducts2} шт";
+            Product3.Text += $"{countProducts3} шт";
 
 
-            if (countProducts1 < 0) { Product1.Visibility = Visibility.Hidden; }
-            if (countProducts2 < 0) { Product1.Visibility = Visibility.Hidden; }
-            if (countProducts3 < 0) { Product1.Visibility = Visibility.Hidden; }
-
+            if (countProducts1 == 0) { Product1.Visibility = Visibility.Collapsed; }
+            if (countProducts2 == 0) { Product2.Visibility = Visibility.Collapsed; }
+            if (countProducts3 == 0) { Product3.Visibility = Visibility.Collapsed; }
+            Itog.Text += $"{sum}";
 
         }
     }

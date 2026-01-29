@@ -15,11 +15,13 @@
         <TextBox HorizontalAlignment="Left" x:Name="EmailUser" Width="100" TextChanged="EmailUser_TextChanged"/>
         <TextBlock Text="Адрес :"/>
         <TextBox HorizontalAlignment="Left" x:Name="AddresUser" Width="100" TextChanged="AddresUser_TextChanged"/>
-        <ListBox x:Name="Zakaz">
-            <ListBoxItem Content="Товар 1" x:Name="Product1"/>
-            <ListBoxItem Content="Товар 2" x:Name="Product2"/>
-            <ListBoxItem Content="Товар 3" x:Name="Product3" IsEnabled="False"/>
+        <ListBox x:Name="Zakaz" IsEnabled="False">
+            <TextBlock>Ваш заказ:</TextBlock>
+            <TextBlock Text="Товар 1" x:Name="Product1"/>
+            <TextBlock Text="Товар 2" x:Name="Product2"/>
+            <TextBlock Text="Товар 3"  x:Name="Product3"/>
+            <TextBlock x:Name="Itog">Итого: </TextBlock>
         </ListBox>
-        <Button Content="Оформить заказ"/>
+        <Button Content="Оформить заказ" Click="Button_Click"/>
     </StackPanel>
 </Page>
