@@ -20,9 +20,39 @@ namespace ISIP323_Anisimov_WPF.Pages
     /// </summary>
     public partial class Page3 : Page
     {
+        List<Product> Basket;
+        string Name, Email, Address;
         public Page3(List<Product> basket)
         {
-            InitializeComponent();
+        Basket = basket;
+                    InitializeComponent();
+                }
+        private void EmailUser_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Email = EmailUser.Text;
         }
+
+        private void AddresUser_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Address = AddresUser.Text;
+        }
+
+       
+        
+        private void NameUser_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Name = NameUser.Text;
+        }
+       
+        void TextZakaz()
+        {
+            string zakaz = "";
+            foreach (var item in Basket)
+            {
+                
+            }
+            ZakazTexbBlock.Text = "Вы заказали" + zakaz;
+        }
+
     }
 }

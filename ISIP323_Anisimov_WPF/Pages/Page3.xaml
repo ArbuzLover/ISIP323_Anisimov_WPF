@@ -10,10 +10,12 @@
 
     <StackPanel HorizontalAlignment="Center">
         <TextBlock Text="Имя клиента:"/>
-        <TextBox HorizontalAlignment="Left" x:Name="NameUser" Width="100"/>
+        <TextBox HorizontalAlignment="Left" x:Name="NameUser" Width="100" TextChanged="NameUser_TextChanged"/>
         <TextBlock Text="Почта:"/>
-        <TextBox HorizontalAlignment="Left" x:Name="EmailUser" Width="100"/>
+        <TextBox HorizontalAlignment="Left" x:Name="EmailUser" Width="100" TextChanged="EmailUser_TextChanged"/>
         <TextBlock Text="Адрес :"/>
-        <TextBox HorizontalAlignment="Left" x:Name="AddresUser" Width="100"/>
+        <TextBox HorizontalAlignment="Left" x:Name="AddresUser" Width="100" TextChanged="AddresUser_TextChanged"/>
+        <TextBlock Text="Ваш заказ:" x:Name="ZakazTexbBlock"/>
+        <Button Content="Оформить заказ"/>
     </StackPanel>
 </Page>
