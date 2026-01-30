@@ -59,7 +59,6 @@ namespace ISIP323_Anisimov_WPF.Pages
                 };
                 Core.Context.Order.Add(NewOrder);
                 Core.Context.SaveChanges();
-                List<Order> orders = Core.Context.Order.ToList();
                 SortBasket();
                 int kolv = 0;
                 foreach (var item in sort)
@@ -91,7 +90,7 @@ namespace ISIP323_Anisimov_WPF.Pages
         {
             bool iter1 = true, iter2 = true, iter3 = true;
             int sum = 0;
-            string zakaz = $"";
+            
             foreach (var item in Basket)
             {
                 if (item.ID == 1)
