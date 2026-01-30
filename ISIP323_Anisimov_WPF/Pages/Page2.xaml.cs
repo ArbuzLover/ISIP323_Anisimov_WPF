@@ -25,20 +25,10 @@ namespace ISIP323_Anisimov_WPF.Pages
         {
             InitializeComponent();
             Basket = basket;
-            IntializeZakaz(Basket);
-        }
-
-        void IntializeZakaz(List<Product> Basket)
-        {
-            string zakaz ="";
             
-            foreach (var item in Basket)
-            {
-                zakaz += $"{item.Name} {item.Price} | ";
-
-            }
-            BasketTextBlock.Text = "Ваш заказ: " + zakaz;
+            BasketListBox.ItemsSource = Basket;
         }
+
 
         private void Page3Button_Click(object sender, RoutedEventArgs e)
         {
