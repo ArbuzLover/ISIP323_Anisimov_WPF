@@ -46,26 +46,47 @@ namespace ISIP323_Anisimov_WPF.Pages
             Name = NameUser.Text;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void OformlenButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Basket.Count > 0 & Name.Length > 0 & Email.Length > 0 & Address.Length > 0) 
+            if (Basket.Count > 0 & !(Name == null) & !(Email == null) & !(Address == null))
             {
-               /* Order NewOrder = new Order()
+                Order NewOrder = new Order()
                 {
                     FIO = Name,
                     Email = Email,
                     Address = Address
-                    
+
                 };
                 Core.Context.Order.Add(NewOrder);
-                Core.Context.SaveChanges(); */
+                Core.Context.SaveChanges();
+                List<Order> orders = Core.Context.Order.ToList();
+                SortBasket();
+                int kolv = 0;
+                foreach (var item in sort)
+                {
+                    if (item.ID == 1) { kolv = countProducts1; }
+                    else if (item.ID == 2) { kolv = countProducts2; }
+                    else if (item.ID == 3) { kolv = countProducts3; }
+                    OrderProducts orderProducts = new OrderProducts()
+                    {
+                        OrderID = NewOrder.ID,
+                        ProductID = item.ID,
+                        Count = kolv
+
+                    };
+                    Core.Context.OrderProducts.Add(orderProducts);
+                    Core.Context.SaveChanges();
+                }
+                
+                
                 MessageBox.Show("Заказ оформлен!");
+                OformlenButton.IsEnabled = false;
             }
             else { MessageBox.Show("Заполнены не все данные!!"); }
         }
 
         int countProducts1 = 0, countProducts2 = 0, countProducts3 = 0;
-        
+
         void TextZakaz()
         {
             bool iter1 = true, iter2 = true, iter3 = true;
@@ -73,18 +94,18 @@ namespace ISIP323_Anisimov_WPF.Pages
             string zakaz = $"";
             foreach (var item in Basket)
             {
-                if (item.ID == 1) 
-                { 
+                if (item.ID == 1)
+                {
                     countProducts1++;
                     if (iter1) { Product1.Text = $"{item.Name} за {item.Price} "; iter1 = false; }
                 }
-                else if (item.ID == 2) 
-                { 
+                else if (item.ID == 2)
+                {
                     countProducts2++;
                     if (iter2) { Product2.Text = $"{item.Name} за {item.Price} "; iter2 = false; }
                 }
-                else if (item.ID == 3) 
-                { 
+                else if (item.ID == 3)
+                {
                     countProducts3++;
                     if (iter3) { Product3.Text = $"{item.Name} за {item.Price} "; iter3 = false; }
                 }
@@ -101,6 +122,33 @@ namespace ISIP323_Anisimov_WPF.Pages
             if (countProducts3 == 0) { Product3.Visibility = Visibility.Collapsed; }
             Itog.Text += $"{sum}";
 
+        }
+
+        List<Product> sort = new List<Product>();
+
+        void SortBasket()
+        {
+            
+            bool sortiter1 = true, sortiter2 = true, sortiter3 = true;
+            foreach (var item in Basket)
+            {
+                if (item.ID == 1)
+                {
+                    if (sortiter1) { sort.Add(item); sortiter1 = false; }
+                    else continue;
+                }
+                else if (item.ID == 2)
+                {
+                    if (sortiter2) { sort.Add(item); sortiter2 = false; }
+                    else continue;
+                }
+                else if (item.ID == 3)
+                {
+
+                    if (sortiter3) { sort.Add(item); sortiter3 = false; }
+                    else continue;
+                }
+            }
         }
     }
 }

@@ -22,6 +22,6 @@
             <TextBlock Text="Товар 3"  x:Name="Product3"/>
             <TextBlock x:Name="Itog">Итого: </TextBlock>
         </ListBox>
-        <Button Content="Оформить заказ" Click="Button_Click"/>
+        <Button Content="Оформить заказ" x:Name="OformlenButton" Click="OformlenButton_Click"/>
     </StackPanel>
 </Page>
