@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button Content="Вернуться назад" x:Name="BackButton" Click="BackButton_OnClick" Width="100" Height="20" HorizontalAlignment="Left"/>
-        <Button Content="Личный кабинет" Grid.Row="0" Width="100" Height="20" Margin="10" Click="Button_Click_1" HorizontalAlignment="Right"/>
+        <Button Content="Личный кабинет" Grid.Row="0" Width="100" Height="20" Margin="10" Click="Button_Click" HorizontalAlignment="Right"/>
         <Frame Source="Pages/MainPage.xaml"  NavigationUIVisibility="Hidden" Navigated="MainFrame_OnNavigated" Grid.Row="1" x:Name="MainFrame"></Frame>
     </Grid>
 </Window>
