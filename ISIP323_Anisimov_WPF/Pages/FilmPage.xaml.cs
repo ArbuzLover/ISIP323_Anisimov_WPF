@@ -21,11 +21,12 @@ namespace ISIP323_Anisimov_WPF.Pages
     public partial class FilmPage : Page
     {
         Films ChooseFilm;
+        
         public FilmPage(Films chooseFilm)
         {
             InitializeComponent();
             ChooseFilm = chooseFilm;
-            FilmsListBox.ItemsSource = ChooseFilm;
+            DataContext = ChooseFilm;
         }
 
     }

@@ -8,6 +8,6 @@ namespace ISIP323_Anisimov_WPF
 {
     internal class Core
     {
-        public static OnlineCinemaPr14Entities Context = new OnlineCinemaPr14Entities();
+        public static OnlineCinemaPr14Entities1 Context = new OnlineCinemaPr14Entities1();
     }
 }

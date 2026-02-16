@@ -52,9 +52,11 @@ namespace ISIP323_Anisimov_WPF.Pages
             if (FilmsListBox.SelectedItem is Films selectedFilm)
             {
 
-                NavigationService.Navigate(new FilmPage(selectedFilm));
 
+                FilmPage filmPage = new FilmPage(selectedFilm);
+                NavigationService.Navigate(filmPage);
             }
+            
         }
         
     }

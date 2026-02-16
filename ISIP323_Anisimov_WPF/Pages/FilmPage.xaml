@@ -9,28 +9,18 @@
       Title="FilmPage" Background="LightCyan">
 
     <Grid>
-        <ListBox x:Name="FilmsListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  SelectionChanged="FilmsListBox_SelectionChanged">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-
-            <ListBox.ItemTemplate>
-                <DataTemplate>
+        
 
                     <StackPanel>
                         <Image  Width="300" Height="300" Source="{Binding ImagePath}"/>
 
                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding Descript}" HorizontalAlignment="Center"/> <!-- в бд назвать так же-->
-                        <TextBlock  Text="{Binding RateFilm}" HorizontalAlignment="Center"/>
-                        <TextBlock  Text="{Binding StartDate}" HorizontalAlignment="Center"/>
-                        <TextBlock  Text="{Binding RateAge.Age}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Description}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Genres.Name}" HorizontalAlignment="Center"/> <!-- ХЗ НЕ РАБОТАЕТ ПОКА ЧТО-->
+            <TextBlock  Text="{Binding RateFilm}" HorizontalAlignment="Center"/>
+            <TextBlock  Text="{Binding RateAge.Age}" HorizontalAlignment="Center"/>
                     </StackPanel>
 
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                
     </Grid>
 </Page>

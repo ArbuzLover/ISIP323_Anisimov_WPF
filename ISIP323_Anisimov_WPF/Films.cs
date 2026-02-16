@@ -27,6 +27,7 @@ namespace ISIP323_Anisimov_WPF
         public decimal RateFilm { get; set; }
         public int IDAgeRate { get; set; }
         public System.DateTime StartDate { get; set; }
+        public string Description { get; set; }
     
         public virtual RateAge RateAge { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

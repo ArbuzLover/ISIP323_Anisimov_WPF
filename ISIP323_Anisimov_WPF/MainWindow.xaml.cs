@@ -23,6 +23,7 @@ namespace ISIP323_Anisimov_WPF
         public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new Pages.MainPage());
         }
 
         private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
@@ -34,12 +35,9 @@ namespace ISIP323_Anisimov_WPF
         {
             if (MainFrame.CanGoBack)
             {
-                MainFrame.GoBack();
-
-
+              MainFrame.GoBack();
             }
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
            //NavigationService.

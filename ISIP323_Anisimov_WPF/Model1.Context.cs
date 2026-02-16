@@ -13,10 +13,10 @@ namespace ISIP323_Anisimov_WPF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OnlineCinemaPr14Entities : DbContext
+    public partial class OnlineCinemaPr14Entities1 : DbContext
     {
-        public OnlineCinemaPr14Entities()
-            : base("name=OnlineCinemaPr14Entities")
+        public OnlineCinemaPr14Entities1()
+            : base("name=OnlineCinemaPr14Entities1")
         {
         }
     

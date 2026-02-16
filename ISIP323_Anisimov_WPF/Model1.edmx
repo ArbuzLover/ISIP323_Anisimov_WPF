@@ -23,6 +23,7 @@
           <Property Name="RateFilm" Type="decimal" Precision="2" Scale="1" Nullable="false" />
           <Property Name="IDAgeRate" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Genres">
           <Key>
@@ -61,7 +62,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Sessions">
           <Key>
@@ -307,6 +308,7 @@
           <Property Name="RateFilm" Type="Decimal" Precision="2" Scale="1" Nullable="false" />
           <Property Name="IDAgeRate" Type="Int32" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RateAge" Relationship="Self.FK_Films_RateAge" FromRole="Films" ToRole="RateAge" />
           <NavigationProperty Name="Sessions" Relationship="Self.FK_Sessions_Films" FromRole="Films" ToRole="Sessions" />
           <NavigationProperty Name="Genres" Relationship="Self.GenresFilms" FromRole="Films" ToRole="Genres" />
@@ -346,7 +348,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Age" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Films" Relationship="Self.FK_Films_RateAge" FromRole="RateAge" ToRole="Films" />
         </EntityType>
         <EntityType Name="Sessions">
@@ -489,7 +491,7 @@
           <End Role="Films" Type="Self.Films" Multiplicity="*" />
           <End Role="Genres" Type="Self.Genres" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="OnlineCinemaPr14Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="OnlineCinemaPr14Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Films" EntityType="Self.Films" />
           <EntitySet Name="Genres" EntityType="Self.Genres" />
           <EntitySet Name="Halls" EntityType="Self.Halls" />
@@ -541,7 +543,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище OnlineCinemaPr14ModelContainer" CdmEntityContainer="OnlineCinemaPr14Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище OnlineCinemaPr14ModelContainer" CdmEntityContainer="OnlineCinemaPr14Entities1">
           <EntitySetMapping Name="Films">
             <EntityTypeMapping TypeName="OnlineCinemaPr14Model.Films">
               <MappingFragment StoreEntitySet="Films">
@@ -551,6 +553,7 @@
                 <ScalarProperty Name="RateFilm" ColumnName="RateFilm" />
                 <ScalarProperty Name="IDAgeRate" ColumnName="IDAgeRate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
