@@ -20,6 +20,7 @@ namespace ISIP323_Anisimov_WPF.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+        public Users CurrentUser = null;
         public List<Films> FilmsBD = Core.Context.Films.ToList();
         public MainPage()
         {
@@ -49,11 +50,9 @@ namespace ISIP323_Anisimov_WPF.Pages
         private void FilmsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            if (FilmsListBox.SelectedItem is Films selectedFilm)
+            if (FilmsListBox.SelectedItem != null && NavigationService != null)
             {
-
-
-                FilmPage filmPage = new FilmPage(selectedFilm);
+                FilmPage filmPage = new FilmPage(FilmsListBox.SelectedItem as Films);
                 NavigationService.Navigate(filmPage);
             }
             

@@ -24,7 +24,9 @@ namespace ISIP323_Anisimov_WPF
         public int ID { get; set; }
         public string Name { get; set; }
         public int PlaceQuantity { get; set; }
+        public int RateID { get; set; }
     
+        public virtual RateHall RateHall { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Places> Places { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

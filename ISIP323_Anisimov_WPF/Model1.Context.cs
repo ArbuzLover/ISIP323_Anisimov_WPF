@@ -13,10 +13,10 @@ namespace ISIP323_Anisimov_WPF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OnlineCinemaPr14Entities1 : DbContext
+    public partial class OnlineCinemaPr14Entities3 : DbContext
     {
-        public OnlineCinemaPr14Entities1()
-            : base("name=OnlineCinemaPr14Entities1")
+        public OnlineCinemaPr14Entities3()
+            : base("name=OnlineCinemaPr14Entities3")
         {
         }
     
@@ -30,6 +30,7 @@ namespace ISIP323_Anisimov_WPF
         public virtual DbSet<Halls> Halls { get; set; }
         public virtual DbSet<Places> Places { get; set; }
         public virtual DbSet<RateAge> RateAge { get; set; }
+        public virtual DbSet<RateHall> RateHall { get; set; }
         public virtual DbSet<Sessions> Sessions { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tickets> Tickets { get; set; }

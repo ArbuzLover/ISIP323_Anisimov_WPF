@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ISIP323_Anisimov_WPF.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,24 +24,28 @@ namespace ISIP323_Anisimov_WPF
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Pages.MainPage());
+            
         }
 
         private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
         {
             BackButton.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (MainFrame.CanGoBack)
+            if (Core.CurrentUser != null)
             {
-              MainFrame.GoBack();
+                Profile.Visibility = Visibility.Visible;
             }
+            else Profile.Visibility = Visibility.Collapsed;
         }
+                private void BackButton_OnClick(object sender, RoutedEventArgs e)
+                {
+                    if (MainFrame.CanGoBack)
+                    {
+                        MainFrame.GoBack();
+                    }
+                }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           //NavigationService.
+            MainFrame.Navigate(new LoginPage());
         }
     }
 }

@@ -20,9 +20,37 @@ namespace ISIP323_Anisimov_WPF.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
+        public List<Users> users = Core.Context.Users.ToList();
         public LoginPage()
         {
             InitializeComponent();
+
         }
-    }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+
+        private void InputButton_Click(object sender, RoutedEventArgs e)
+        {
+            var user = Core.Context.Users.FirstOrDefault(u => u.Login == UserLogin.Text && u.Password == UserPassword.Text);
+            if (user != null)
+            {
+                Core.CurrentUser = user;
+                NavigationService.Navigate(new MainPage());
+            }
+            else
+            {
+                MessageBox.Show("Неверное имя аккаунта или пароль");
+            }
+        }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new RegPage());
+        }
+
+       
+}
 }

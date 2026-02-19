@@ -20,14 +20,32 @@ namespace ISIP323_Anisimov_WPF.Pages
     /// </summary>
     public partial class FilmPage : Page
     {
-        Films ChooseFilm;
-        
+       
+        public Films ChooseFilm { get; set; }
+        public List<Sessions> SessionsBD = Core.Context.Sessions.ToList();
         public FilmPage(Films chooseFilm)
         {
             InitializeComponent();
-            ChooseFilm = chooseFilm;
-            DataContext = ChooseFilm;
+           ChooseFilm = chooseFilm;
+            DataContext = this;
+            GenresListBox.ItemsSource = ChooseFilm.Genres;
+           List<Sessions> SessionsBD1 = (List<Sessions>)SessionsBD.Where(u => u.IDFilm == ChooseFilm.ID).ToList();
+        SessionsListBox.ItemsSource = SessionsBD1;
         }
 
+        private void SessionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Core.CurrentUser == null)
+            {
+                MessageBox.Show("Войдите в аккаунт для продолжения!");
+            }
+            else
+            
+            if (SessionsListBox.SelectedItem != null && NavigationService != null)
+            {
+                Core.CurrentSession = SessionsListBox.SelectedItem as Sessions;
+                NavigationService.Navigate(new BuyTicketPage(Core.CurrentSession, Core.CurrentUser));
+            }
+        }
     }
 }

@@ -9,18 +9,52 @@
       Title="FilmPage" Background="LightCyan">
 
     <Grid>
-        
 
-                    <StackPanel>
-                        <Image  Width="300" Height="300" Source="{Binding ImagePath}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Image  Width="300" Height="300" Source="{Binding ChooseFilm.ImagePath}"/>
+
+            <TextBlock Text="{Binding ChooseFilm.Name}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding ChooseFilm.Description}" HorizontalAlignment="Center"/>
+            <ListBox x:Name="GenresListBox" Width="200" ItemsSource="{Binding  ChooseFilm.Genres}" IsEnabled="False">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
 
                         <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"/>
-            <TextBlock Text="{Binding Description}" HorizontalAlignment="Center"/>
-            <TextBlock Text="{Binding Genres.Name}" HorizontalAlignment="Center"/> <!-- ХЗ НЕ РАБОТАЕТ ПОКА ЧТО-->
-            <TextBlock  Text="{Binding RateFilm}" HorizontalAlignment="Center"/>
-            <TextBlock  Text="{Binding RateAge.Age}" HorizontalAlignment="Center"/>
-                    </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBlock  Text="{Binding ChooseFilm.RateFilm}" HorizontalAlignment="Center"/>
+            <TextBlock  Text="{Binding ChooseFilm.RateAge.Age}" HorizontalAlignment="Center"/>
+        </StackPanel>
 
-                
+
+
+        <StackPanel Grid.Column="1">
+            <ListBox x:Name="SessionsListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1" SelectionChanged="SessionsListBox_SelectionChanged">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="{Binding DateTime}" HorizontalAlignment="Center"/>
+                            <TextBlock  Text="{Binding Halls.Name}" HorizontalAlignment="Center" Margin="10,0,0,0"/>
+                            <TextBlock  Text="{Binding Halls.RateHall.Type}" HorizontalAlignment="Center" Margin="10,0,0,0"/>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
     </Grid>
 </Page>

@@ -47,6 +47,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PlaceQuantity" Type="int" Nullable="false" />
+          <Property Name="RateID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Places">
           <Key>
@@ -63,6 +64,13 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Age" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RateHall">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Sessions">
           <Key>
@@ -98,11 +106,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="E-mail" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="BirthDay" Type="date" Nullable="false" />
         </EntityType>
         <Association Name="FK_BusyPlaces_Places">
           <End Role="Places" Type="Self.Places" Multiplicity="1" />
@@ -161,6 +166,18 @@
             </Principal>
             <Dependent Role="GenresFilms">
               <PropertyRef Name="IDGenress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Halls_RateHall">
+          <End Role="RateHall" Type="Self.RateHall" Multiplicity="1" />
+          <End Role="Halls" Type="Self.Halls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RateHall">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Halls">
+              <PropertyRef Name="RateID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -244,6 +261,7 @@
           <EntitySet Name="Halls" EntityType="Self.Halls" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Places" EntityType="Self.Places" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RateAge" EntityType="Self.RateAge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RateHall" EntityType="Self.RateHall" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
@@ -267,6 +285,10 @@
           <AssociationSet Name="FK_GenresFilms_Genres" Association="Self.FK_GenresFilms_Genres">
             <End Role="Genres" EntitySet="Genres" />
             <End Role="GenresFilms" EntitySet="GenresFilms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Halls_RateHall" Association="Self.FK_Halls_RateHall">
+            <End Role="RateHall" EntitySet="RateHall" />
+            <End Role="Halls" EntitySet="Halls" />
           </AssociationSet>
           <AssociationSet Name="FK_Places_Halls" Association="Self.FK_Places_Halls">
             <End Role="Halls" EntitySet="Halls" />
@@ -328,6 +350,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PlaceQuantity" Type="Int32" Nullable="false" />
+          <Property Name="RateID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RateHall" Relationship="Self.FK_Halls_RateHall" FromRole="Halls" ToRole="RateHall" />
           <NavigationProperty Name="Places" Relationship="Self.FK_Places_Halls" FromRole="Halls" ToRole="Places" />
           <NavigationProperty Name="Sessions" Relationship="Self.FK_Sessions_Halls" FromRole="Halls" ToRole="Sessions" />
         </EntityType>
@@ -350,6 +374,14 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Age" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Films" Relationship="Self.FK_Films_RateAge" FromRole="RateAge" ToRole="Films" />
+        </EntityType>
+        <EntityType Name="RateHall">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Halls" Relationship="Self.FK_Halls_RateHall" FromRole="RateHall" ToRole="Halls" />
         </EntityType>
         <EntityType Name="Sessions">
           <Key>
@@ -392,11 +424,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BirthDay" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_Users" FromRole="Users" ToRole="Tickets" />
         </EntityType>
         <Association Name="FK_Films_RateAge">
@@ -420,6 +449,18 @@
             </Principal>
             <Dependent Role="Sessions">
               <PropertyRef Name="IDFilm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Halls_RateHall">
+          <End Role="RateHall" Type="Self.RateHall" Multiplicity="1" />
+          <End Role="Halls" Type="Self.Halls" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RateHall">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Halls">
+              <PropertyRef Name="RateID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -491,12 +532,13 @@
           <End Role="Films" Type="Self.Films" Multiplicity="*" />
           <End Role="Genres" Type="Self.Genres" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="OnlineCinemaPr14Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="OnlineCinemaPr14Entities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Films" EntityType="Self.Films" />
           <EntitySet Name="Genres" EntityType="Self.Genres" />
           <EntitySet Name="Halls" EntityType="Self.Halls" />
           <EntitySet Name="Places" EntityType="Self.Places" />
           <EntitySet Name="RateAge" EntityType="Self.RateAge" />
+          <EntitySet Name="RateHall" EntityType="Self.RateHall" />
           <EntitySet Name="Sessions" EntityType="Self.Sessions" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tickets" EntityType="Self.Tickets" />
@@ -508,6 +550,10 @@
           <AssociationSet Name="FK_Sessions_Films" Association="Self.FK_Sessions_Films">
             <End Role="Films" EntitySet="Films" />
             <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Halls_RateHall" Association="Self.FK_Halls_RateHall">
+            <End Role="RateHall" EntitySet="RateHall" />
+            <End Role="Halls" EntitySet="Halls" />
           </AssociationSet>
           <AssociationSet Name="FK_Places_Halls" Association="Self.FK_Places_Halls">
             <End Role="Halls" EntitySet="Halls" />
@@ -543,7 +589,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище OnlineCinemaPr14ModelContainer" CdmEntityContainer="OnlineCinemaPr14Entities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище OnlineCinemaPr14ModelContainer" CdmEntityContainer="OnlineCinemaPr14Entities3">
           <EntitySetMapping Name="Films">
             <EntityTypeMapping TypeName="OnlineCinemaPr14Model.Films">
               <MappingFragment StoreEntitySet="Films">
@@ -571,6 +617,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="PlaceQuantity" ColumnName="PlaceQuantity" />
+                <ScalarProperty Name="RateID" ColumnName="RateID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -589,6 +636,14 @@
               <MappingFragment StoreEntitySet="RateAge">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RateHall">
+            <EntityTypeMapping TypeName="OnlineCinemaPr14Model.RateHall">
+              <MappingFragment StoreEntitySet="RateHall">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -628,11 +683,8 @@
             <EntityTypeMapping TypeName="OnlineCinemaPr14Model.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
-                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

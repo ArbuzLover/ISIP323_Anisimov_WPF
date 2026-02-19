@@ -12,19 +12,18 @@ namespace ISIP323_Anisimov_WPF
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class RateHall
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
+        public RateHall()
         {
-            this.Tickets = new HashSet<Tickets>();
+            this.Halls = new HashSet<Halls>();
         }
     
         public int ID { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public string Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tickets> Tickets { get; set; }
+        public virtual ICollection<Halls> Halls { get; set; }
     }
 }
