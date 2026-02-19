@@ -47,5 +47,11 @@ namespace ISIP323_Anisimov_WPF
         {
             MainFrame.Navigate(new LoginPage());
         }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Profile(Core.CurrentUser));
+        }
     }
 }
+

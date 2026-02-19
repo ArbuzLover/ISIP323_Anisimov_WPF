@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Remoting.Contexts;
@@ -25,7 +26,7 @@ namespace ISIP323_Anisimov_WPF.Pages
     {
         private Sessions _session;
         private Users _user;
-        private OnlineCinemaPr14Entities3 _db = new OnlineCinemaPr14Entities3();
+        private OnlineCinemaPr14Entities4 _db = new OnlineCinemaPr14Entities4();
 
         public BuyTicketPage(Sessions session, Users user)
         {
@@ -38,21 +39,22 @@ namespace ISIP323_Anisimov_WPF.Pages
 
         private void LoadSeats()
         {
+            // Получаем все места для зала
             var seats = _db.Places
-        .Include(p => p.Hall)
-        .Include(p => p.BusyPlaces)
-        .ThenInclude(bp => bp.Session)
-        .Where(p => p.BusyPlaces.Any(bp => bp.IDSession == _session.ID))
-        .ToList();
+                .Where(p => p.IDHall == _session.IDHall)
+                .ToList();
 
             foreach (var seat in seats)
             {
-                // Проверяем, есть ли билет на это место (занято/куплено)
-                bool isPurchased = seat.BusyPlaces.Any(bp => bp.IDSession == _session.ID);
+                // Проверяем, занято ли место через отдельный запрос к BusyPlaces
+                bool isPurchased = _db.BusyPlaces
+                    .Any(bp => bp.IDPlace == seat.ID && bp.IDSession == _session.ID);
 
                 var button = new Button
                 {
+                    // ИСПРАВЛЕНО: убраны лишние фигурные скобки
                     Content = $"{seat.Row}-{seat.Number}",
+
                     Width = 45,
                     Height = 45,
                     Margin = new Thickness(3),
@@ -61,6 +63,7 @@ namespace ISIP323_Anisimov_WPF.Pages
                     IsEnabled = !isPurchased
                 };
 
+                // Добавляем обработчик события и кнопку на форму
                 button.Click += Seat_Click;
                 SeatsControl.Items.Add(button);
             }
@@ -68,15 +71,22 @@ namespace ISIP323_Anisimov_WPF.Pages
 
         private void Seat_Click(object sender, RoutedEventArgs e)
         {
-            var btn = sender as Button;
-            var seat = btn.Tag as Places;
+            var button = sender as Button;
+            var seat = button?.Tag as Places;
 
-            if (btn.Background == Brushes.LightGreen)
-                btn.Background = Brushes.Orange;
-            else if (btn.Background == Brushes.Orange)
-                btn.Background = Brushes.LightGreen;
-
-            UpdateInfo();
+            if (seat != null && button.IsEnabled)
+            {
+                if (button.Background == Brushes.LightGreen)
+                {
+                    button.Background = Brushes.Orange;
+                    // Добавить в список выбранных
+                }
+                else if (button.Background == Brushes.Orange)
+                {
+                    button.Background = Brushes.LightGreen;
+                    // Удалить из списка выбранных
+                }
+            }
         }
 
         private void UpdateInfo()

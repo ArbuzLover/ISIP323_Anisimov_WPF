@@ -7,11 +7,11 @@
       <Schema Namespace="Хранилище OnlineCinemaPr14Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BusyPlaces">
           <Key>
-            <PropertyRef Name="IDPlace" />
-            <PropertyRef Name="IDSession" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="IDPlace" Type="int" Nullable="false" />
           <Property Name="IDSession" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Films">
           <Key>
@@ -320,6 +320,16 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnlineCinemaPr14Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BusyPlaces">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="IDPlace" Type="Int32" Nullable="false" />
+          <Property Name="IDSession" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Places" Relationship="Self.FK_BusyPlaces_Places" FromRole="BusyPlaces" ToRole="Places" />
+          <NavigationProperty Name="Sessions" Relationship="Self.FK_BusyPlaces_Sessions" FromRole="BusyPlaces" ToRole="Sessions" />
+        </EntityType>
         <EntityType Name="Films">
           <Key>
             <PropertyRef Name="ID" />
@@ -363,9 +373,9 @@
           <Property Name="Row" Type="Int32" Nullable="false" />
           <Property Name="Number" Type="Int32" Nullable="false" />
           <Property Name="IDHall" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BusyPlaces" Relationship="Self.FK_BusyPlaces_Places" FromRole="Places" ToRole="BusyPlaces" />
           <NavigationProperty Name="Halls" Relationship="Self.FK_Places_Halls" FromRole="Places" ToRole="Halls" />
           <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_Places" FromRole="Places" ToRole="Tickets" />
-          <NavigationProperty Name="Sessions" Relationship="Self.BusyPlaces" FromRole="Places" ToRole="Sessions" />
         </EntityType>
         <EntityType Name="RateAge">
           <Key>
@@ -391,10 +401,10 @@
           <Property Name="IDHall" Type="Int32" Nullable="false" />
           <Property Name="IDFilm" Type="Int32" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BusyPlaces" Relationship="Self.FK_BusyPlaces_Sessions" FromRole="Sessions" ToRole="BusyPlaces" />
           <NavigationProperty Name="Films" Relationship="Self.FK_Sessions_Films" FromRole="Sessions" ToRole="Films" />
           <NavigationProperty Name="Halls" Relationship="Self.FK_Sessions_Halls" FromRole="Sessions" ToRole="Halls" />
           <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_Sessions" FromRole="Sessions" ToRole="Tickets" />
-          <NavigationProperty Name="Places" Relationship="Self.BusyPlaces" FromRole="Sessions" ToRole="Places" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -428,6 +438,30 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_Users" FromRole="Users" ToRole="Tickets" />
         </EntityType>
+        <Association Name="FK_BusyPlaces_Places">
+          <End Role="Places" Type="Self.Places" Multiplicity="1" />
+          <End Role="BusyPlaces" Type="Self.BusyPlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BusyPlaces">
+              <PropertyRef Name="IDPlace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BusyPlaces_Sessions">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+          <End Role="BusyPlaces" Type="Self.BusyPlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BusyPlaces">
+              <PropertyRef Name="IDSession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Films_RateAge">
           <End Role="RateAge" Type="Self.RateAge" Multiplicity="1" />
           <End Role="Films" Type="Self.Films" Multiplicity="*" />
@@ -524,15 +558,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="BusyPlaces">
-          <End Role="Places" Type="Self.Places" Multiplicity="*" />
-          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
-        </Association>
         <Association Name="GenresFilms">
           <End Role="Films" Type="Self.Films" Multiplicity="*" />
           <End Role="Genres" Type="Self.Genres" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="OnlineCinemaPr14Entities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="OnlineCinemaPr14Entities4" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BusyPlaces" EntityType="Self.BusyPlaces" />
           <EntitySet Name="Films" EntityType="Self.Films" />
           <EntitySet Name="Genres" EntityType="Self.Genres" />
           <EntitySet Name="Halls" EntityType="Self.Halls" />
@@ -543,6 +574,14 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tickets" EntityType="Self.Tickets" />
           <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_BusyPlaces_Places" Association="Self.FK_BusyPlaces_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="BusyPlaces" EntitySet="BusyPlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BusyPlaces_Sessions" Association="Self.FK_BusyPlaces_Sessions">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="BusyPlaces" EntitySet="BusyPlaces" />
+          </AssociationSet>
           <AssociationSet Name="FK_Films_RateAge" Association="Self.FK_Films_RateAge">
             <End Role="RateAge" EntitySet="RateAge" />
             <End Role="Films" EntitySet="Films" />
@@ -575,10 +614,6 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Tickets" EntitySet="Tickets" />
           </AssociationSet>
-          <AssociationSet Name="BusyPlaces" Association="Self.BusyPlaces">
-            <End Role="Places" EntitySet="Places" />
-            <End Role="Sessions" EntitySet="Sessions" />
-          </AssociationSet>
           <AssociationSet Name="GenresFilms" Association="Self.GenresFilms">
             <End Role="Films" EntitySet="Films" />
             <End Role="Genres" EntitySet="Genres" />
@@ -589,7 +624,16 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище OnlineCinemaPr14ModelContainer" CdmEntityContainer="OnlineCinemaPr14Entities3">
+        <EntityContainerMapping StorageEntityContainer="Хранилище OnlineCinemaPr14ModelContainer" CdmEntityContainer="OnlineCinemaPr14Entities4">
+          <EntitySetMapping Name="BusyPlaces">
+            <EntityTypeMapping TypeName="OnlineCinemaPr14Model.BusyPlaces">
+              <MappingFragment StoreEntitySet="BusyPlaces">
+                <ScalarProperty Name="IDPlace" ColumnName="IDPlace" />
+                <ScalarProperty Name="IDSession" ColumnName="IDSession" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Films">
             <EntityTypeMapping TypeName="OnlineCinemaPr14Model.Films">
               <MappingFragment StoreEntitySet="Films">
@@ -688,14 +732,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="BusyPlaces" TypeName="OnlineCinemaPr14Model.BusyPlaces" StoreEntitySet="BusyPlaces">
-            <EndProperty Name="Places">
-              <ScalarProperty Name="ID" ColumnName="IDPlace" />
-            </EndProperty>
-            <EndProperty Name="Sessions">
-              <ScalarProperty Name="ID" ColumnName="IDSession" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="GenresFilms" TypeName="OnlineCinemaPr14Model.GenresFilms" StoreEntitySet="GenresFilms">
             <EndProperty Name="Films">
               <ScalarProperty Name="ID" ColumnName="IDFilm" />

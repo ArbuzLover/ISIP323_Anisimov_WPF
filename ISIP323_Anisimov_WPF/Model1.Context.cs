@@ -13,10 +13,10 @@ namespace ISIP323_Anisimov_WPF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OnlineCinemaPr14Entities3 : DbContext
+    public partial class OnlineCinemaPr14Entities4 : DbContext
     {
-        public OnlineCinemaPr14Entities3()
-            : base("name=OnlineCinemaPr14Entities3")
+        public OnlineCinemaPr14Entities4()
+            : base("name=OnlineCinemaPr14Entities4")
         {
         }
     
@@ -25,6 +25,7 @@ namespace ISIP323_Anisimov_WPF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BusyPlaces> BusyPlaces { get; set; }
         public virtual DbSet<Films> Films { get; set; }
         public virtual DbSet<Genres> Genres { get; set; }
         public virtual DbSet<Halls> Halls { get; set; }

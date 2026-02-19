@@ -17,8 +17,8 @@ namespace ISIP323_Anisimov_WPF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Places()
         {
+            this.BusyPlaces = new HashSet<BusyPlaces>();
             this.Tickets = new HashSet<Tickets>();
-            this.Sessions = new HashSet<Sessions>();
         }
     
         public int ID { get; set; }
@@ -26,10 +26,10 @@ namespace ISIP323_Anisimov_WPF
         public int Number { get; set; }
         public int IDHall { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BusyPlaces> BusyPlaces { get; set; }
         public virtual Halls Halls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tickets> Tickets { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sessions> Sessions { get; set; }
     }
 }
