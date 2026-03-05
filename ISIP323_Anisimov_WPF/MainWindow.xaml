@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
         
+                <Button Content="Выбор комплектующих" Click="GoToAssemblyPage" Width="300" HorizontalAlignment="Left"/>
+        <Button Content="Сохраненные сборки" Click="GoToSavedAssembliesPage" Width="300" HorizontalAlignment="Right"/>
+
+
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Source="Pages/SborPage.xaml"/>
     </Grid>
 </Window>

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ISIP323_Anisimov_WPF.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +25,16 @@ namespace ISIP323_Anisimov_WPF
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void GoToAssemblyPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new SborPage());
+        }
+
+        private void GoToSavedAssembliesPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new SavePage());
         }
     }
 }
