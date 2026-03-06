@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ISIP323_Kosheleva.Model
+namespace ISIP323_Anisimov_WPF.Model
 {
     internal class Skelet : Enemy
     {

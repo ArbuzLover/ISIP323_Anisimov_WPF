@@ -7,6 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Игра виагра" HorizontalAlignment="Center" FontSize="20"/>
+
+        <Grid x:Name="TopInterface" Grid.Row="1" >
+            <TextBlock Text="Этаж: " FontSize="15" HorizontalAlignment="Left"/>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Text="HP " />
+                <ProgressBar x:Name="HPProgressBar" Maximum="100" Minimum="0" Value="100" Height="15" Foreground="Red" />
+                <TextBlock x:Name="HP" Text="{Binding HP}"></TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <Frame Grid.Row="2">
+            
+        </Frame>
         
     </Grid>
 </Window>

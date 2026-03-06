@@ -6,7 +6,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ISIP323_Kosheleva.Model
+namespace ISIP323_Anisimov_WPF.Model
 {
     internal class EnemyFactory
     {
