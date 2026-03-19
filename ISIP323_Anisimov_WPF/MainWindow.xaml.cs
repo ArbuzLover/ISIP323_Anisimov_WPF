@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ISIP323_Anisimov_WPF.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,12 @@ namespace ISIP323_Anisimov_WPF
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = Game.GameLogs;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Game.MainGame();
         }
     }
 }

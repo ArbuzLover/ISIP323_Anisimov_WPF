@@ -40,13 +40,13 @@ namespace ISIP323_Anisimov_WPF.Model
                 int blockPercent = rnd.Next(70, 101);
                 dmg = dmg * (100 - blockPercent) / 100;
                 player.BlockNextAttack = false;
-                Console.WriteLine($"Блок уменьшил получаемый урон на {blockPercent}%!");
+               Game.GameLogs.Add($"Блок уменьшил получаемый урон на {blockPercent}%!");
             }
 
             if (HasCrit && rnd.Next(100) < CritChance)
             {
                 dmg *= 2;
-                Console.WriteLine($"{Name} нанес крит");
+                Game.GameLogs.Add($"{Name} нанес крит");
             }
 
             if (dmg < 0) dmg = 0;
@@ -55,7 +55,7 @@ namespace ISIP323_Anisimov_WPF.Model
             if (CanFreeze && rnd.Next(100) < FreezeChance)
             {
                 player.IsFrozen = true;
-                Console.WriteLine($"{Name} наложил заморозку! Вы пропустите следующий ход.");
+                Game.GameLogs.Add($"{Name} наложил заморозку! Вы пропустите следующий ход.");
             }
         }
 

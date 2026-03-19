@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace ISIP323_Anisimov_WPF.Model
 {
@@ -10,7 +12,7 @@ namespace ISIP323_Anisimov_WPF.Model
     {
         static Random rnd = new Random();
 
-        
+        public static ObservableCollection <string> GameLogs = new ObservableCollection<string> { };
 
         public static void OpenChest(Player player)
         {
@@ -33,12 +35,12 @@ namespace ISIP323_Anisimov_WPF.Model
 
         public static void Battle(Player player, Enemy enemy)
         {
-            Console.WriteLine($"\nВы столкнулись с {enemy.Name}!");
+            GameLogs.Add($"Вы столкнулись с {enemy.Name}!");
             while (player.IsAlive() && enemy.IsAlive())
             {
                 if (!player.IsFrozen)
                 {
-                    Console.Write("Ваш ход! 1 - Атака, 2 - Защита: ");
+                    GameLogs.Add("Ваш ход! 1 - Атака, 2 - Защита: ");
                     string choice = Console.ReadLine().Trim();
 
                     if (choice == "1")
@@ -46,21 +48,21 @@ namespace ISIP323_Anisimov_WPF.Model
                         int dmg = player.Weapon.Damage - enemy.Defense;
                         if (dmg < 1) dmg = 1;
                         enemy.CurrentHP -= dmg;
-                        Console.WriteLine($"Вы нанесли {dmg} урона {enemy.Name}! HP врага: {enemy.CurrentHP}/{enemy.MaxHP}");
+                        GameLogs.Add($"Вы нанесли {dmg} урона {enemy.Name}! HP врага: {enemy.CurrentHP}/{enemy.MaxHP}");
                     }
                     else if (choice == "2")
                     {
                         if (!player.TryDodge(rnd))
                         {
                             player.BlockNextAttack = true;
-                            Console.WriteLine("Уклонение не удалось, блок уменьшит получаемый урон!");
+                            GameLogs.Add("Уклонение не удалось, блок уменьшит получаемый урон!");
                         }
                     }
-                    else { Console.WriteLine("Неверный ввод!"); continue; }
+                    else { GameLogs.Add("Неверный ввод!"); continue; }
                 }
                 else
                 {
-                    Console.WriteLine("Вы пропускаете ход из-за заморозки!");
+                    GameLogs.Add("Вы пропускаете ход из-за заморозки!");
                     player.IsFrozen = false;
                 }
 
@@ -69,9 +71,9 @@ namespace ISIP323_Anisimov_WPF.Model
             }
 
             if (player.IsAlive())
-                Console.WriteLine($"Выйграл нах {enemy.Name}!\n");
+                GameLogs.Add($"Выйграл нах {enemy.Name}!");
             else
-                Console.WriteLine("Сдох нах\n");
+                GameLogs.Add("Сдох нах");
         }
 
         public static void MainGame()
@@ -82,28 +84,28 @@ namespace ISIP323_Anisimov_WPF.Model
             while (player.IsAlive())
             {
                 turn++;
-                Console.WriteLine($"\n===== Ход {turn} =====");
+                GameLogs.Add($"===== Ход {turn} =====");
                 bool isBossTurn = (turn % 10 == 0);
                 bool chestEvent = rnd.Next(2) == 0;
 
-                if (chestEvent && !isBossTurn)
-                {
-                    Console.WriteLine("Вы нашли сундук");
-                    OpenChest(player);
-                }
-                else
-                {
-                    Enemy enemy;
-                    if (isBossTurn) { enemy = EnemyFactory.CreateBossEnemy(); }
-                    else {enemy = EnemyFactory.CreateEnemy();}
-                                                                        
-                    Battle(player, enemy);
-                    if (!player.IsAlive()) break;
-                }
+                    if (chestEvent && !isBossTurn)
+                    {
+                        GameLogs.Add("Вы нашли сундук");
+                        OpenChest(player);
+                    }
+                    else
+                    {
+                        Enemy enemy;
+                        if (isBossTurn) { enemy = EnemyFactory.CreateBossEnemy(); }
+                       else { enemy = EnemyFactory.CreateEnemy(); }
+
+                        Battle(player, enemy);
+                        if (!player.IsAlive()) break;
+                    }
 
             }
 
-            Console.WriteLine($"Конец! Вы прошли {turn} ходов.");
+            GameLogs.Add($"Конец! Вы прошли {turn} ходов.");
         }
     }
 }
