@@ -13,9 +13,13 @@ namespace ISIP323_Anisimov_WPF.Model
         static Random rnd = new Random();
 
         public static ObservableCollection <string> GameLogs = new ObservableCollection<string> { };
+        public static int turn = 0;
+        public static Player Currentplayer = new Player("Герой", 100, new Weapon("палец 5", 5), new Armor("Броня-кожа 5", 5));
+        public static Enemy CurrentEnemy;
 
         public static void OpenChest(Player player)
         {
+            
             int roll = rnd.Next(3);
             if (roll == 0)
                 player.Heal();
@@ -78,8 +82,8 @@ namespace ISIP323_Anisimov_WPF.Model
 
         public static void MainGame()
         {
-            Player player = new Player("Герой", 100, new Weapon("палец 5", 5), new Armor("Броня-кожа 5", 5));
-            int turn = 0;
+            Player player = Currentplayer;
+            
 
             while (player.IsAlive())
             {
@@ -88,21 +92,21 @@ namespace ISIP323_Anisimov_WPF.Model
                 bool isBossTurn = (turn % 10 == 0);
                 bool chestEvent = rnd.Next(2) == 0;
 
-                    if (chestEvent && !isBossTurn)
-                    {
-                        GameLogs.Add("Вы нашли сундук");
-                        OpenChest(player);
-                    }
-                    else
-                    {
-                        Enemy enemy;
-                        if (isBossTurn) { enemy = EnemyFactory.CreateBossEnemy(); }
-                       else { enemy = EnemyFactory.CreateEnemy(); }
+                if (chestEvent && !isBossTurn)
+                {
+                    GameLogs.Add("Вы нашли сундук");
+                    OpenChest(player);
+                }
+                else
+                {
+                    
+                    if (isBossTurn) { CurrentEnemy = EnemyFactory.CreateBossEnemy(); }
+                    else { CurrentEnemy = EnemyFactory.CreateEnemy(); }
 
-                        Battle(player, enemy);
-                        if (!player.IsAlive()) break;
-                    }
-
+                    Battle(player, CurrentEnemy);
+                    if (!player.IsAlive()) break;
+                }
+                player.HP = -1;
             }
 
             GameLogs.Add($"Конец! Вы прошли {turn} ходов.");

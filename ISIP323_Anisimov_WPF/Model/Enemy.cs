@@ -20,6 +20,7 @@ namespace ISIP323_Anisimov_WPF.Model
         public int FreezeChance = 0;
         public int IgnoreAtttack;
 
+
         public Enemy(int hp, int attack, int defense, int ignoreAtttack)
         {
             MaxHP = hp;

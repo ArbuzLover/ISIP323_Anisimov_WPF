@@ -22,7 +22,7 @@
         <Label Content="Игра виагра" HorizontalAlignment="Center" FontSize="20" Grid.ColumnSpan="2"/>
 
         <Grid x:Name="TopInterface" Grid.Row="1" Grid.ColumnSpan="2">
-            <TextBlock Text="Этаж: " FontSize="15" HorizontalAlignment="Left"/>
+            <TextBlock Text="Этаж: {0}" FontSize="15" HorizontalAlignment="Left" x:Name="CurrentTurn"/>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <TextBlock Text="HP " />
                 <ProgressBar x:Name="HPProgressBar" Maximum="100" Minimum="0" Value="100" Height="15" Width="200" Foreground="Red" />
@@ -30,7 +30,7 @@
             </StackPanel>
         </Grid>
 
-        <Frame Grid.Row="2" Grid.ColumnSpan="2">
+        <Frame Grid.Row="2" Grid.ColumnSpan="2" x:Name="MainFrame">
 
         </Frame>
 
@@ -41,7 +41,7 @@
         </Grid>
 
 
-        <ListView Grid.Row="3" Grid.Column="1">
+        <ListView Grid.Row="3" Grid.Column="1" x:Name="Logs">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
@@ -56,6 +56,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Content="НАЧАТЬ" Grid.ColumnSpan="2" Grid.RowSpan="4" Click="Button_Click"/>
     </Grid>
 </Window>
