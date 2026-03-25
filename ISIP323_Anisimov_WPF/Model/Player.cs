@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ISIP323_Anisimov_WPF.Model
 {
@@ -35,6 +36,7 @@ namespace ISIP323_Anisimov_WPF.Model
             Game.GameLogs.Add($"Вы нашли оружие: {newWeapon.Name} (Атака +{newWeapon.Damage})");
             Game.GameLogs.Add($"Ваше текущее оружие: {Weapon.Name}  (Атака + {Weapon.Damage})");
             Game.GameLogs.Add("Вы хотите заменить оружие? (1 - Да, 2 - Нет): ");
+            
             string choice = Console.ReadLine().Trim();
             if (choice == "1")
             {
