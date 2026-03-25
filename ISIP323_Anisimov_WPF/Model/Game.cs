@@ -45,40 +45,36 @@ namespace ISIP323_Anisimov_WPF.Model
             {
                 if (!player.IsFrozen)
                 {
-                    GameLogs.Add("Ваш ход! 1 - Атака, 2 - Защита: ");
+                   
+                    GameLogs.Add("Ваш ход! Да - Атака, Нет - Защита: ");
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        MessageBoxResult result = MessageBox.Show("Да или нет?", "Важный вопрос!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        ChoiceAtackOrDefend:
+                        MessageBoxResult result = MessageBox.Show("Ваш ход! Да - Атака, Нет - Защита: ", "Важный вопрос!", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (result == MessageBoxResult.Yes)
                         {
-                            MessageBox.Show("Ты нажал да!", "Круто", MessageBoxButton.OK, MessageBoxImage.Information);
+                            int dmg = player.Weapon.Damage - enemy.Defense;
+                            if (dmg < 1) dmg = 1;
+                                enemy.CurrentHP -= dmg;
+                                GameLogs.Add($"Вы нанесли {dmg} урона {enemy.Name}! HP врага: {enemy.CurrentHP}/{enemy.MaxHP}");
                         }
                         else if (result == MessageBoxResult.No)
                         {
-                            MessageBox.Show("Зачем ты нажал нет?(", "Не круто(", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                            if (!player.TryDodge(rnd))
+                            {
+                                player.BlockNextAttack = true;
+                                GameLogs.Add("Уклонение не удалось, блок уменьшит получаемый урон!");
+                            }
+                            else { GameLogs.Add("Неверный ввод!"); goto ChoiceAtackOrDefend; }
                         }
                     });
-                //    if (choice == "1")
-                //    {
-                //        int dmg = player.Weapon.Damage - enemy.Defense;
-                //        if (dmg < 1) dmg = 1;
-                //        enemy.CurrentHP -= dmg;
-                //        GameLogs.Add($"Вы нанесли {dmg} урона {enemy.Name}! HP врага: {enemy.CurrentHP}/{enemy.MaxHP}");
-                //    }
-                //    else if (choice == "2")
-                //    {
-                //        if (!player.TryDodge(rnd))
-                //        {
-                //            player.BlockNextAttack = true;
-                //            GameLogs.Add("Уклонение не удалось, блок уменьшит получаемый урон!");
-                //        }
-                //    }
-                //    else { GameLogs.Add("Неверный ввод!"); continue; }
-                //}
-                //else
-                //{
-                //    GameLogs.Add("Вы пропускаете ход из-за заморозки!");
-                //    player.IsFrozen = false;
+               
+                    
+                }
+                else
+                {
+                    GameLogs.Add("Вы пропускаете ход из-за заморозки!");
+                   player.IsFrozen = false;
                 }
 
                 if (enemy.IsAlive())
