@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,10 @@ namespace ISIP323_Anisimov_WPF.Model
         public bool CanFreeze = false;
         public int FreezeChance = 0;
         public int IgnoreAtttack;
+        public String ImagePath { get; set; }
 
 
-        public Enemy(int hp, int attack, int defense, int ignoreAtttack)
+        public Enemy(int hp, int attack, int defense, int ignoreAtttack, string imagePath = null)
         {
             MaxHP = hp;
             CurrentHP = hp;

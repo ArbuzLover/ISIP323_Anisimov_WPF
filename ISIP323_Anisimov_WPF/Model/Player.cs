@@ -10,8 +10,8 @@ namespace ISIP323_Anisimov_WPF.Model
     internal class Player
     {
         public string Name;
-        public int MaxHP;
-        public int HP;
+        public int MaxHP { get; set; }
+        public int HP { get; set; }
         public bool IsFrozen = false;
         public bool BlockNextAttack = false;
         public Weapon Weapon { get; set; }

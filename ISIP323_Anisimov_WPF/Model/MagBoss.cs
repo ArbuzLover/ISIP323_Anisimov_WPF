@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace ISIP323_Anisimov_WPF.Model
 {
@@ -16,6 +17,7 @@ namespace ISIP323_Anisimov_WPF.Model
             Attack = (int)(15 * 1.6);
             Defense = (int)(2 * 1.1);
             FreezeChance += 10;
+            ImagePath = "/Images/MagBoss.jpg";
         }
 
     }

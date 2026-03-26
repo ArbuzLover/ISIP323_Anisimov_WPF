@@ -27,6 +27,10 @@ namespace ISIP323_Anisimov_WPF
             InitializeComponent();
             Logs.ItemsSource = Game.GameLogs;
             CurrentTurn.Text = "Этаж: " + Game.turn;
+            Armor.DataContext = Game.Currentplayer;
+            Weapon.DataContext = Game.Currentplayer;
+            HPTextBlock.DataContext = Game.Currentplayer;
+            
             Game.MainGame();
             
         }

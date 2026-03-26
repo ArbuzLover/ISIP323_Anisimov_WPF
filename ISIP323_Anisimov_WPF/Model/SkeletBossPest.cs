@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace ISIP323_Anisimov_WPF.Model
 {
@@ -16,6 +17,7 @@ namespace ISIP323_Anisimov_WPF.Model
             Attack = (int)(10 * 1.8);
             Defense = (int)(5    * 0.6);
             FreezeChance = 15;
+            ImagePath = "/Images/BossPest.jpg";
         }
 
     }

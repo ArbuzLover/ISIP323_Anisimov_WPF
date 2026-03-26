@@ -4,8 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace ISIP323_Anisimov_WPF.Model
 {
@@ -16,8 +17,7 @@ namespace ISIP323_Anisimov_WPF.Model
         public static ObservableCollection <string> GameLogs = new ObservableCollection<string> { };
         public static int turn = 0;
         public static Player Currentplayer = new Player("Герой", 100, new Weapon("палец 5", 5), new Armor("Броня-кожа 5", 5));
-        public static Enemy CurrentEnemy;
-
+        public static Enemy CurrentEnemy = new Goblin();
         public static void OpenChest(Player player)
         {
             
@@ -47,16 +47,16 @@ namespace ISIP323_Anisimov_WPF.Model
                 {
                    
                     GameLogs.Add("Ваш ход! Да - Атака, Нет - Защита: ");
-                    Application.Current.Dispatcher.Invoke(() =>
+                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        ChoiceAtackOrDefend:
+                    ChoiceAtackOrDefend:
                         MessageBoxResult result = MessageBox.Show("Ваш ход! Да - Атака, Нет - Защита: ", "Важный вопрос!", MessageBoxButton.YesNo, MessageBoxImage.Question);
                         if (result == MessageBoxResult.Yes)
                         {
                             int dmg = player.Weapon.Damage - enemy.Defense;
                             if (dmg < 1) dmg = 1;
-                                enemy.CurrentHP -= dmg;
-                                GameLogs.Add($"Вы нанесли {dmg} урона {enemy.Name}! HP врага: {enemy.CurrentHP}/{enemy.MaxHP}");
+                            enemy.CurrentHP -= dmg;
+                            GameLogs.Add($"Вы нанесли {dmg} урона {enemy.Name}! HP врага: {enemy.CurrentHP}/{enemy.MaxHP}");
                         }
                         else if (result == MessageBoxResult.No)
                         {
@@ -67,10 +67,9 @@ namespace ISIP323_Anisimov_WPF.Model
                             }
                             else { GameLogs.Add("Неверный ввод!"); goto ChoiceAtackOrDefend; }
                         }
-                    });
-               
-                    
+                    }));
                 }
+
                 else
                 {
                     GameLogs.Add("Вы пропускаете ход из-за заморозки!");

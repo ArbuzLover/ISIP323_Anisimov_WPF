@@ -26,33 +26,33 @@
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <TextBlock Text="HP " />
                 <ProgressBar x:Name="HPProgressBar" Maximum="100" Minimum="0" Value="100" Height="15" Width="200" Foreground="Red" />
-                <TextBlock x:Name="HP" Text="{Binding HP}"></TextBlock>
+                <TextBlock x:Name="HPTextBlock" Text="{Binding HP}"/>
             </StackPanel>
         </Grid>
 
-        <Frame Grid.Row="2" Grid.ColumnSpan="2" x:Name="MainFrame">
-
-        </Frame>
-
-
-        <Grid Grid.Row="3" >
-            <TextBlock HorizontalAlignment="Left" Text="Броня: " FontSize="22" VerticalAlignment="Center"></TextBlock>
-            <TextBlock HorizontalAlignment="Right" Text="Оружие: " FontSize="22" VerticalAlignment="Center"></TextBlock>
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" x:Name="MainFrame">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="503*"/>
+                <ColumnDefinition Width="287*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding CurrentEnemy.ImagePath}" x:Name="ImageEnemy" Grid.ColumnSpan="2"/>
         </Grid>
 
 
-        <ListView Grid.Row="3" Grid.Column="1" x:Name="Logs">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel />
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
+        <Grid Grid.Row="3" >
+            <TextBlock HorizontalAlignment="Left" Text="{Binding Armor.Name}" FontSize="22" VerticalAlignment="Center" x:Name="Armor"/>
+            <TextBlock HorizontalAlignment="Right" Text="{Binding Weapon.Name}" FontSize="22" VerticalAlignment="Center" x:Name="Weapon"/>
+        </Grid>
+
+
+        <ListView Grid.Row="3" Grid.Column="1" x:Name="Logs" >
+
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding}"/>
-                    </StackPanel>
+
+                    <TextBlock Text="{Binding}"/>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
