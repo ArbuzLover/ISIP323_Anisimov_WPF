@@ -9,7 +9,7 @@ namespace ISIP323_Anisimov_WPF.Model
 {
     internal class Mag : Enemy
     {
-        public Mag() : base(25, 15, 2, 0, "/Images/Mag.jpg")
+        public Mag() : base(25, 15, 2, 0, "./Images/Mag.jpg")
         {
             Name = "Маг";
             CanFreeze = true;

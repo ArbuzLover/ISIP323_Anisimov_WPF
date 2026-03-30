@@ -9,7 +9,7 @@ namespace ISIP323_Anisimov_WPF.Model
 {
     internal class Goblin : Enemy
     {
-        public Goblin() : base(30, 12, 3, 0, "/Images/Goblin.jpg")
+        public Goblin() : base(30, 12, 3, 0, "./Images/Goblin.jpg")
         {
             Name = "Гоблин";
             HasCrit = true;

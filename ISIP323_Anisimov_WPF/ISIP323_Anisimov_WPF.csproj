@@ -81,7 +81,6 @@
     <Compile Include="Model\Skelet.cs" />
     <Compile Include="Model\SkeletBossKova.cs" />
     <Compile Include="Model\SkeletBossPest.cs" />
-    <Compile Include="Model\Slime.cs" />
     <Compile Include="Model\Weapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -112,7 +111,7 @@
     <Resource Include="Images\BossPest.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\Skelet.jpg" />
+    <Resource Include="Images\Skelet.jpg" />
     <Resource Include="Images\Mag.jpg" />
     <Resource Include="Images\Goblin.jpg" />
     <Resource Include="Images\GoblinBoss.jpg" />

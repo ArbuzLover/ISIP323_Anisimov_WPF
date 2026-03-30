@@ -18,7 +18,7 @@ namespace ISIP323_Anisimov_WPF.Model
         public static int turn = 0;
         public static Player Currentplayer = new Player("Герой", 100, new Weapon("палец 5", 5), new Armor("Броня-кожа 5", 5));
         public static Enemy CurrentEnemy = new Goblin();
-        public static void OpenChest(Player player)
+        public static void OpenChest(Player player , MainWindow CurrentAction)
         {
             
             int roll = rnd.Next(3);
@@ -38,7 +38,7 @@ namespace ISIP323_Anisimov_WPF.Model
             }
         }
 
-        public static void Battle(Player player, Enemy enemy)
+        public static void Battle(Player player, Enemy enemy, MainWindow CurrentAction)
         {
             GameLogs.Add($"Вы столкнулись с {enemy.Name}!");
             while (player.IsAlive() && enemy.IsAlive())
@@ -47,27 +47,27 @@ namespace ISIP323_Anisimov_WPF.Model
                 {
                    
                     GameLogs.Add("Ваш ход! Да - Атака, Нет - Защита: ");
-                    Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-                    {
-                    ChoiceAtackOrDefend:
-                        MessageBoxResult result = MessageBox.Show("Ваш ход! Да - Атака, Нет - Защита: ", "Важный вопрос!", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (result == MessageBoxResult.Yes)
+
+                        
+                        if (CurrentAction.BattleChoice() == true)
                         {
                             int dmg = player.Weapon.Damage - enemy.Defense;
                             if (dmg < 1) dmg = 1;
                             enemy.CurrentHP -= dmg;
                             GameLogs.Add($"Вы нанесли {dmg} урона {enemy.Name}! HP врага: {enemy.CurrentHP}/{enemy.MaxHP}");
+                        CurrentAction.UpdateUI();
                         }
-                        else if (result == MessageBoxResult.No)
+                        else if (CurrentAction.BattleChoice() == false)
                         {
                             if (!player.TryDodge(rnd))
                             {
                                 player.BlockNextAttack = true;
                                 GameLogs.Add("Уклонение не удалось, блок уменьшит получаемый урон!");
-                            }
-                            else { GameLogs.Add("Неверный ввод!"); goto ChoiceAtackOrDefend; }
+                                CurrentAction.UpdateUI();
                         }
-                    }));
+                        }
+                        else { GameLogs.Add("Неверный ввод!"); }
+
                 }
 
                 else
@@ -86,7 +86,7 @@ namespace ISIP323_Anisimov_WPF.Model
                 GameLogs.Add("Сдох нах");
         }
 
-        public static void MainGame()
+        public static void MainGame(MainWindow CurrentAction)
         {
             Player player = Currentplayer;
             
@@ -101,7 +101,7 @@ namespace ISIP323_Anisimov_WPF.Model
                 if (chestEvent && !isBossTurn)
                 {
                     GameLogs.Add("Вы нашли сундук");
-                    OpenChest(player);
+                    OpenChest(player, CurrentAction);
                 }
                 else
                 {
@@ -109,7 +109,7 @@ namespace ISIP323_Anisimov_WPF.Model
                     if (isBossTurn) { CurrentEnemy = EnemyFactory.CreateBossEnemy(); }
                     else { CurrentEnemy = EnemyFactory.CreateEnemy(); }
 
-                    Battle(player, CurrentEnemy);
+                    Battle(player, CurrentEnemy, CurrentAction);
                     if (!player.IsAlive()) break;
                 }
                 player.HP = -1;

@@ -13,13 +13,12 @@ namespace ISIP323_Anisimov_WPF.Model
         public static Enemy CreateEnemy()
         {
              Random rnd = new Random();
-                int roll = rnd.Next(4);
+                int roll = rnd.Next(3);
                 switch (roll)
                 {
                     case 0: return new Goblin();
                     case 1: return new Skelet();
                     case 2: return new Mag();
-                    case 3: return new Slime();
                 default: return null;
                 }
             

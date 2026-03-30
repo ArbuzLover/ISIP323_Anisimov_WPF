@@ -17,7 +17,7 @@ namespace ISIP323_Anisimov_WPF.Model
             Attack = (int)(15 * 1.6);
             Defense = (int)(2 * 1.1);
             FreezeChance += 10;
-            ImagePath = "/Images/MagBoss.jpg";
+            ImagePath = "./Images/MagBoss.jpg";
         }
 
     }

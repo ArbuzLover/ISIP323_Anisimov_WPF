@@ -16,7 +16,7 @@ namespace ISIP323_Anisimov_WPF.Model
             CurrentHP = MaxHP;
             Attack = (int)(10 * 1.3);
             Defense = (int)(5 * 1.4);
-            ImagePath = "/Images/BossKoval.jpg";
+            ImagePath = "./Images/BossKoval.jpg";
         }
 
     }

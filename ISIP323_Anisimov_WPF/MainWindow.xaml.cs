@@ -22,6 +22,7 @@ namespace ISIP323_Anisimov_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+   
         public MainWindow()
         {
             InitializeComponent();
@@ -30,11 +31,44 @@ namespace ISIP323_Anisimov_WPF
             Armor.DataContext = Game.Currentplayer;
             Weapon.DataContext = Game.Currentplayer;
             HPTextBlock.DataContext = Game.Currentplayer;
+            HPProgressBar.Value = Game.Currentplayer.HP;
+            HPProgressBar.Maximum = Game.Currentplayer.MaxHP;
+            ImageEnemy.DataContext = Game.CurrentEnemy;
             
-            Game.MainGame();
+           
             
         }
-
        
+        private void Attack_Click(object sender, RoutedEventArgs e)
+        {
+            Game.MainGame(this);
+        }
+
+        private void Defend_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        public bool BattleChoice()
+        {
+           
+            ChoiceAtackOrDefend:
+                MessageBoxResult result = MessageBox.Show("Ваш ход! Да - Атака, Нет - Защита: ", "Важный вопрос!", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                if (result == MessageBoxResult.Yes)
+                {
+                    return true;
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    return false;
+                }
+             else { Game.GameLogs.Add("Неверный ввод!"); goto ChoiceAtackOrDefend; }
+        }
+
+        public void UpdateUI()
+        {
+            
+            HPProgressBar.Value = Game.Currentplayer.HP;    
+        }
+
     }
 }

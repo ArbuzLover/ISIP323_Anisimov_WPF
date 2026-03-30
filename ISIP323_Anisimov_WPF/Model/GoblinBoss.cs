@@ -17,7 +17,7 @@ namespace ISIP323_Anisimov_WPF.Model
             Attack = (int)(12 * 1.5);
             Defense = (int)(3 * 1.2);
             CritChance += 10;
-            ImagePath = "/Images/GoblinBoss.jpg";
+            ImagePath = "./Images/GoblinBoss.jpg";
         }
 
     }

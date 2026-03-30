@@ -25,17 +25,21 @@
             <TextBlock Text="Этаж: {0}" FontSize="15" HorizontalAlignment="Left" x:Name="CurrentTurn"/>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <TextBlock Text="HP " />
-                <ProgressBar x:Name="HPProgressBar" Maximum="100" Minimum="0" Value="100" Height="15" Width="200" Foreground="Red" />
+                <ProgressBar x:Name="HPProgressBar" Maximum="100" Minimum="0" Value="10" Height="15" Width="200" Foreground="Red" />
                 <TextBlock x:Name="HPTextBlock" Text="{Binding HP}"/>
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" x:Name="MainFrame">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="503*"/>
-                <ColumnDefinition Width="287*"/>
+                <ColumnDefinition Width="35*"/>
+                <ColumnDefinition Width="65*"/>
             </Grid.ColumnDefinitions>
-            <Image Source="{Binding CurrentEnemy.ImagePath}" x:Name="ImageEnemy" Grid.ColumnSpan="2"/>
+            <StackPanel>
+                <Button x:Name="Attack" Content="Attack" FontSize="30" Background="Red" Click="Attack_Click"/>
+                <Button x:Name="Defend" Content="Defend" FontSize="30" Background="Blue" Click="Defend_Click"/>
+            </StackPanel>
+            <Image Source="{Binding ImagePath}" x:Name="ImageEnemy" Grid.Column="1"/>
         </Grid>
 
 

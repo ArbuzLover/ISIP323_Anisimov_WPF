@@ -20,7 +20,7 @@ namespace ISIP323_Anisimov_WPF.Model
         public bool CanFreeze = false;
         public int FreezeChance = 0;
         public int IgnoreAtttack;
-        public String ImagePath { get; set; }
+        public string ImagePath { get; set; }
 
 
         public Enemy(int hp, int attack, int defense, int ignoreAtttack, string imagePath = null)
