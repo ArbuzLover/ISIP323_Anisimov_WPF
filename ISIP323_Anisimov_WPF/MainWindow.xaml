@@ -31,11 +31,33 @@
         </Grid>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" x:Name="MainFrame">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="35*"/>
-                <ColumnDefinition Width="65*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <ListBox x:Name="EnemyListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="0" SelectionChanged="EnemyListBox_SelectionChanged">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+
+                        <StackPanel>
+                            <Image  Width="300" Height="300" Source="{Binding ImagePath}"/>
+
+                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"/>
+                            <TextBlock  Text="{Binding RateFilm}" HorizontalAlignment="Center"/>
+                            <TextBlock  Text="{Binding StartDate}" HorizontalAlignment="Center"/>
+                            <TextBlock  Text="{Binding RateAge.Age}" HorizontalAlignment="Center"/>
+                        </StackPanel>
+
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
                 <Button x:Name="Attack" Content="Attack" FontSize="30" Background="Red" Click="Attack_Click"/>
                 <Button x:Name="Defend" Content="Defend" FontSize="30" Background="Blue" Click="Defend_Click"/>
             </StackPanel>

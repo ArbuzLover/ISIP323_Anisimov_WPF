@@ -70,5 +70,9 @@ namespace ISIP323_Anisimov_WPF
             HPProgressBar.Value = Game.Currentplayer.HP;    
         }
 
+        private void EnemyListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
