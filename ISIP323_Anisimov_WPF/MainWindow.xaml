@@ -7,13 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Button Content="Вернуться назад" x:Name="BackButton" Click="BackButton_OnClick" Width="100" Height="20" HorizontalAlignment="Left"  Margin="10"/>
-        <Button Content="Профиль" x:Name="Profile" Click="Profile_Click" Width="100" Height="20" HorizontalAlignment="Center"  Margin="10" Visibility="Collapsed"/>
-        <Button Content="Войти" Grid.Row="0" Width="100" Height="20" Margin="10" Click="Button_Click" HorizontalAlignment="Right"/>
-        <Frame Source="Pages/MainPage.xaml"  NavigationUIVisibility="Hidden" Navigated="MainFrame_OnNavigated" Grid.Row="1" x:Name="MainFrame"></Frame>
+
+
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

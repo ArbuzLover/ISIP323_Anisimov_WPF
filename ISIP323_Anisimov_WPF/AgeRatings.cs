@@ -12,18 +12,20 @@ namespace ISIP323_Anisimov_WPF
     using System;
     using System.Collections.Generic;
     
-    public partial class RateHall
+    public partial class AgeRatings
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RateHall()
+        public AgeRatings()
         {
-            this.Halls = new HashSet<Halls>();
+            this.Movies = new HashSet<Movies>();
         }
     
-        public int ID { get; set; }
-        public string Type { get; set; }
+        public int AgeRatingID { get; set; }
+        public string AgeRatingCode { get; set; }
+        public int AgeRatingValue { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Halls> Halls { get; set; }
+        public virtual ICollection<Movies> Movies { get; set; }
     }
 }

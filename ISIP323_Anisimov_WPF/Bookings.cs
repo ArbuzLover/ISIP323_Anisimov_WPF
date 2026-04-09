@@ -12,13 +12,17 @@ namespace ISIP323_Anisimov_WPF
     using System;
     using System.Collections.Generic;
     
-    public partial class BusyPlaces
+    public partial class Bookings
     {
-        public int IDPlace { get; set; }
-        public int IDSession { get; set; }
-        public int ID { get; set; }
+        public int BookingID { get; set; }
+        public Nullable<int> UserID { get; set; }
+        public Nullable<int> SessionID { get; set; }
+        public Nullable<int> SeatID { get; set; }
+        public Nullable<System.DateTime> BookingDate { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
-        public virtual Places Places { get; set; }
+        public virtual Seats Seats { get; set; }
         public virtual Sessions Sessions { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

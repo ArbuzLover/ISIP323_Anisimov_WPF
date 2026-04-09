@@ -17,13 +17,13 @@ namespace ISIP323_Anisimov_WPF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Genres()
         {
-            this.Films = new HashSet<Films>();
+            this.MovieGenres = new HashSet<MovieGenres>();
         }
     
-        public int ID { get; set; }
-        public string Name { get; set; }
+        public int GenreID { get; set; }
+        public string GenreName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Films> Films { get; set; }
+        public virtual ICollection<MovieGenres> MovieGenres { get; set; }
     }
 }

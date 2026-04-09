@@ -13,10 +13,10 @@ namespace ISIP323_Anisimov_WPF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OnlineCinemaPr14Entities4 : DbContext
+    public partial class PrSDADIMkadatoEntities : DbContext
     {
-        public OnlineCinemaPr14Entities4()
-            : base("name=OnlineCinemaPr14Entities4")
+        public PrSDADIMkadatoEntities()
+            : base("name=PrSDADIMkadatoEntities")
         {
         }
     
@@ -25,16 +25,15 @@ namespace ISIP323_Anisimov_WPF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<BusyPlaces> BusyPlaces { get; set; }
-        public virtual DbSet<Films> Films { get; set; }
+        public virtual DbSet<AgeRatings> AgeRatings { get; set; }
+        public virtual DbSet<Bookings> Bookings { get; set; }
         public virtual DbSet<Genres> Genres { get; set; }
         public virtual DbSet<Halls> Halls { get; set; }
-        public virtual DbSet<Places> Places { get; set; }
-        public virtual DbSet<RateAge> RateAge { get; set; }
-        public virtual DbSet<RateHall> RateHall { get; set; }
+        public virtual DbSet<MovieGenres> MovieGenres { get; set; }
+        public virtual DbSet<Movies> Movies { get; set; }
+        public virtual DbSet<Seats> Seats { get; set; }
         public virtual DbSet<Sessions> Sessions { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Tickets> Tickets { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

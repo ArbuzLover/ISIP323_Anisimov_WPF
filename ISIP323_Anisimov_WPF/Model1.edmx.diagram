@@ -4,29 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b568fdcde5db420ea10db99ea2f42582" Name="Diagram1">
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.BusyPlaces" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.Films" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.Genres" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.Halls" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.Places" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.RateAge" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.RateHall" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.Sessions" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.Tickets" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnlineCinemaPr14Model.Users" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.FK_BusyPlaces_Places" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.FK_BusyPlaces_Sessions" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.FK_Films_RateAge" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.FK_Sessions_Films" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.FK_Halls_RateHall" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.FK_Places_Halls" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.FK_Sessions_Halls" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.FK_Tickets_Places" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.FK_Tickets_Sessions" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.FK_Tickets_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="OnlineCinemaPr14Model.GenresFilms" ManuallyRouted="false" />
+      <Diagram DiagramId="7fa4f11b08da444b8dd9f6227df15a94" Name="Diagram1">
+        <EntityTypeShape EntityType="PrSDADIMkadatoModel.AgeRatings" Width="1.5" PointX="1.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrSDADIMkadatoModel.Bookings" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrSDADIMkadatoModel.Genres" Width="1.5" PointX="1.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrSDADIMkadatoModel.Halls" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrSDADIMkadatoModel.MovieGenres" Width="1.5" PointX="4" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrSDADIMkadatoModel.Movies" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrSDADIMkadatoModel.Seats" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrSDADIMkadatoModel.Sessions" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrSDADIMkadatoModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrSDADIMkadatoModel.Users" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="PrSDADIMkadatoModel.FK__Movies__AgeRatin__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="PrSDADIMkadatoModel.FK__Bookings__SeatID__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="PrSDADIMkadatoModel.FK__Bookings__Sessio__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="PrSDADIMkadatoModel.FK__Bookings__UserID__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="PrSDADIMkadatoModel.FK__MovieGenr__Genre__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="PrSDADIMkadatoModel.FK__Seats__HallID__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="PrSDADIMkadatoModel.FK__Sessions__HallID__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="PrSDADIMkadatoModel.FK__MovieGenr__Movie__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="PrSDADIMkadatoModel.FK__Sessions__MovieI__6B24EA82" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

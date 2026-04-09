@@ -1,0 +1,54 @@
+﻿<Page x:Class="ISIP323_Anisimov_WPF.Pages.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ISIP323_Anisimov_WPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProfilePage">
+
+    <ScrollViewer>
+        <StackPanel Margin="10">
+            <Button Content="← Назад" Click="Back_Click" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Личный кабинет" FontSize="20" FontWeight="Bold" Margin="10"/>
+
+            <Border BorderBrush="Black" BorderThickness="1" Padding="10" Margin="5">
+                <StackPanel>
+                    <TextBlock Text="Информация об аккаунте:" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <TextBlock x:Name="UsernameText" Margin="0,2"/>
+                    <TextBlock x:Name="EmailText" Margin="0,2"/>
+                    <TextBlock x:Name="FullNameText" Margin="0,2"/>
+                    <TextBlock x:Name="RegDateText" Margin="0,2"/>
+                </StackPanel>
+            </Border>
+
+            <TextBlock Text="Мои билеты:" FontWeight="Bold" Margin="10,20,10,10"/>
+
+            <ListBox x:Name="BookingsList" Margin="5">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="10">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
+                                <TextBlock Text="Дата: " Margin="0,5,0,0"/>
+                                <TextBlock Text="{Binding SessionDate, StringFormat={}{0:dd.MM.yyyy}}"/>
+                                <TextBlock Text="Время: " Margin="0,5,0,0"/>
+                                <TextBlock Text="{Binding SessionTime}"/>
+                                <TextBlock Text="Зал: " Margin="0,5,0,0"/>
+                                <TextBlock Text="{Binding HallName}"/>
+                                <TextBlock Text="Ряд: " Margin="0,5,0,0"/>
+                                <TextBlock Text="{Binding SeatRow}"/>
+                                <TextBlock Text="Место: " Margin="0,5,0,0"/>
+                                <TextBlock Text="{Binding SeatNumber}"/>
+                                <TextBlock Text="Цена: " Margin="0,5,0,0"/>
+                                <TextBlock Text="{Binding Price}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

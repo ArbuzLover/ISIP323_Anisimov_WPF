@@ -17,20 +17,19 @@ namespace ISIP323_Anisimov_WPF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sessions()
         {
-            this.BusyPlaces = new HashSet<BusyPlaces>();
-            this.Tickets = new HashSet<Tickets>();
+            this.Bookings = new HashSet<Bookings>();
         }
     
-        public int ID { get; set; }
-        public int IDHall { get; set; }
-        public int IDFilm { get; set; }
-        public System.DateTime DateTime { get; set; }
+        public int SessionID { get; set; }
+        public Nullable<int> MovieID { get; set; }
+        public Nullable<int> HallID { get; set; }
+        public System.DateTime SessionDate { get; set; }
+        public System.TimeSpan SessionTime { get; set; }
+        public decimal Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BusyPlaces> BusyPlaces { get; set; }
-        public virtual Films Films { get; set; }
+        public virtual ICollection<Bookings> Bookings { get; set; }
         public virtual Halls Halls { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tickets> Tickets { get; set; }
+        public virtual Movies Movies { get; set; }
     }
 }

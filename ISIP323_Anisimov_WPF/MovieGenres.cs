@@ -12,16 +12,13 @@ namespace ISIP323_Anisimov_WPF
     using System;
     using System.Collections.Generic;
     
-    public partial class Tickets
+    public partial class MovieGenres
     {
-        public int ID { get; set; }
-        public int IDUser { get; set; }
-        public int IDPlace { get; set; }
-        public decimal Price { get; set; }
-        public int IDSession { get; set; }
+        public int MovieID { get; set; }
+        public int GenreID { get; set; }
+        public string Description { get; set; }
     
-        public virtual Places Places { get; set; }
-        public virtual Sessions Sessions { get; set; }
-        public virtual Users Users { get; set; }
+        public virtual Genres Genres { get; set; }
+        public virtual Movies Movies { get; set; }
     }
 }

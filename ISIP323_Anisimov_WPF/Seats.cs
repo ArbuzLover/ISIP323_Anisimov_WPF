@@ -12,24 +12,22 @@ namespace ISIP323_Anisimov_WPF
     using System;
     using System.Collections.Generic;
     
-    public partial class Places
+    public partial class Seats
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Places()
+        public Seats()
         {
-            this.BusyPlaces = new HashSet<BusyPlaces>();
-            this.Tickets = new HashSet<Tickets>();
+            this.Bookings = new HashSet<Bookings>();
         }
     
-        public int ID { get; set; }
-        public int Row { get; set; }
-        public int Number { get; set; }
-        public int IDHall { get; set; }
+        public int SeatID { get; set; }
+        public Nullable<int> HallID { get; set; }
+        public int SeatRow { get; set; }
+        public int SeatNumber { get; set; }
+        public Nullable<bool> IsAvailable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BusyPlaces> BusyPlaces { get; set; }
+        public virtual ICollection<Bookings> Bookings { get; set; }
         public virtual Halls Halls { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tickets> Tickets { get; set; }
     }
 }

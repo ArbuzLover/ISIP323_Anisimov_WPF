@@ -6,40 +6,37 @@
       xmlns:local="clr-namespace:ISIP323_Anisimov_WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="LoginPage" Background="LightCyan">
+      Title="LoginPage">
 
-    <Grid>
+    <StackPanel>
+        <Button Content="Назад" Click="Back_Click"
+                HorizontalAlignment="Left" FontSize="20"
+                Margin="5" Height="40" Width="100"/>
 
-        
-        <!-- main -->
-        <Border Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="1" BorderBrush="Black" Width="400" Height="350">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Row="0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="200"/>
-                        </Grid.ColumnDefinitions>
-                        <Button x:Name="LoginButton" Grid.Column="0" FontSize="15" Content="Войти" Width="150" Height="30"  Background="Transparent" BorderBrush="Transparent"/>
-                        <Button x:Name="RegisterButton" Grid.Column="1" FontSize="15"  Content="Зарегистрироваться"  Width="150" Height="30"  Background="Transparent" BorderBrush="Transparent" Click="RegisterButton_Click"/>
-                    </Grid>
-                </StackPanel>
-                <StackPanel Margin="5,5,5,5" VerticalAlignment="Center" Grid.Row="1">
-                    <TextBlock Text="Введите логин" FontSize="20" HorizontalAlignment="Center"/>
-                    <TextBox x:Name="UserLogin" Padding="8,10" Height="38"/>
-                    <TextBlock Text="Введите пароль" FontSize="20"  HorizontalAlignment="Center"/>
-                    <TextBox x:Name="UserPassword" Padding="8,10" Height="38"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
+        <TextBlock Text="Вход" FontSize="24" Margin="10"
+                   HorizontalAlignment="Left"/>
 
-                    <Button Grid.Row="1" Width="150" x:Name="InputButton" Click="InputButton_Click" Content="Войти" FontSize="15" Background="Transparent"  Margin="5,5,5,10"  VerticalAlignment="Bottom"/>
-                    
-                </StackPanel>
-            </Grid>
-        </Border>
-    </Grid>
+        <TextBlock Text="Логин:" Margin="5"
+                   FontSize="20" HorizontalAlignment="Left"/>
+        <TextBox x:Name="LoginBox" Margin="5"
+                 HorizontalAlignment="Left"
+                 Height="40" Width="200"/>
+
+        <TextBlock Text="Пароль:" Margin="5"
+                   FontSize="20" HorizontalAlignment="Left"/>
+        <PasswordBox x:Name="PasswordBox" Margin="5"
+                     HorizontalAlignment="Left"
+                     Height="40" Width="200"/>
+
+        <Button Content="Войти" Height="35" Width="Auto"
+                Click="Login_Click" Margin="5" 
+                HorizontalAlignment="Left" FontSize="20"/>
+
+        <TextBlock Text="Нет аккаунта?" HorizontalAlignment="Left" Margin="5,20,0,5"/>
+        <Button Content="Зарегистрироваться" Click="ToRegisterPage_Click"
+                Margin="5" Height="45" Width="Auto"
+                HorizontalAlignment="Left" FontSize="20"/>
+
+        <TextBlock x:Name="MessageText" Foreground="Black" TextWrapping="Wrap" Margin="5"/>
+    </StackPanel>
 </Page>

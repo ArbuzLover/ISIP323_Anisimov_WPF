@@ -21,36 +21,12 @@ namespace ISIP323_Anisimov_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Users CurrentUser = null;
+
         public MainWindow()
         {
             InitializeComponent();
-            
-        }
-
-        private void MainFrame_OnNavigated(object sender, NavigationEventArgs e)
-        {
-            BackButton.Visibility = MainFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
-            if (Core.CurrentUser != null)
-            {
-                Profile.Visibility = Visibility.Visible;
-            }
-            else Profile.Visibility = Visibility.Collapsed;
-        }
-                private void BackButton_OnClick(object sender, RoutedEventArgs e)
-                {
-                    if (MainFrame.CanGoBack)
-                    {
-                        MainFrame.GoBack();
-                    }
-                }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new LoginPage());
-        }
-
-        private void Profile_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new Profile(Core.CurrentUser));
+            MainFrame.Navigate(new MainPage());
         }
     }
 }
