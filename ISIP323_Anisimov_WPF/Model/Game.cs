@@ -18,8 +18,9 @@ namespace ISIP323_Anisimov_WPF.Model
         public static int turn = 0;
         public static Player Currentplayer = new Player("Герой", 100, new Weapon("палец 20",20), new Armor("Броня-кожа 10", 10));
         public static Enemy CurrentEnemy = new Goblin();
-        public static List<Enemy> EnemyList = new List<Enemy>();
-        
+        public static ObservableCollection<Enemy> EnemyList = new ObservableCollection<Enemy> { };
+        public static bool BattleChoice = false;
+
         public static void OpenChest(Player player, MainWindow CurrentAction)
         {
 
@@ -40,12 +41,12 @@ namespace ISIP323_Anisimov_WPF.Model
             }
         }
 
-        public static void Battle(Player player, List <Enemy> Listenemy, MainWindow CurrentAction)
+        public static void Battle(Player player, ObservableCollection <Enemy> Listenemy, MainWindow CurrentAction)
         {
             Enemy ChoiceEnemy = CurrentAction.EnemyListBox.SelectedItem as Enemy;
             foreach (var item in Listenemy)
             {
-                GameLogs.Add($"Вы столкнулись с{item.Name}");
+                GameLogs.Add($"Вы столкнулись с {item.Name}");
             }
 
             while (player.IsAlive() && Listenemy.Count !=0)
@@ -56,7 +57,7 @@ namespace ISIP323_Anisimov_WPF.Model
                     GameLogs.Add("Ваш ход! Да - Атака, Нет - Защита: ");
 
 
-                    if (CurrentAction.BattleChoice() == true)
+                    if (BattleChoice == true)
                     {
                         int dmg = player.Weapon.Damage - ChoiceEnemy.Defense;
                         if (dmg < 1) dmg = 1;
@@ -64,7 +65,7 @@ namespace ISIP323_Anisimov_WPF.Model
                         GameLogs.Add($"Вы нанесли {dmg} урона {ChoiceEnemy.Name}! HP врага: {ChoiceEnemy.CurrentHP}/{ChoiceEnemy.MaxHP}");
                         CurrentAction.UpdateUI();
                     }
-                    else if (CurrentAction.BattleChoice() == false)
+                    else if (BattleChoice == false)
                     {
                         if (!player.TryDodge(rnd))
                         {
@@ -127,6 +128,7 @@ namespace ISIP323_Anisimov_WPF.Model
                                 {
                                     CurrentEnemy = EnemyFactory.CreateEnemy();
                                     EnemyList.Add(CurrentEnemy);
+                                    
                                     break;
                                 }
                             case 1:
@@ -135,6 +137,7 @@ namespace ISIP323_Anisimov_WPF.Model
                                     EnemyList.Add(CurrentEnemy);
                                     CurrentEnemy = EnemyFactory.CreateEnemy();
                                     EnemyList.Add(CurrentEnemy);
+                                    
                                     break;
                                 }
                             case 2:
@@ -145,13 +148,14 @@ namespace ISIP323_Anisimov_WPF.Model
                                     EnemyList.Add(CurrentEnemy);
                                     CurrentEnemy = EnemyFactory.CreateEnemy();
                                     EnemyList.Add(CurrentEnemy);
+                                    
                                     break;
                                 }
                             default:
                                 break;
                         }
 
-                        Battle(player, EnemyList, CurrentAction);
+                        //Battle(player, EnemyList, CurrentAction);
                         if (!player.IsAlive()) break;
                     }
                     player.HP = -1;

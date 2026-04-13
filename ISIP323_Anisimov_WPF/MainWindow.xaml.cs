@@ -26,6 +26,7 @@ namespace ISIP323_Anisimov_WPF
         public MainWindow()
         {
             InitializeComponent();
+            Game.MainGame(this);
             Logs.ItemsSource = Game.GameLogs;
             CurrentTurn.Text = "Этаж: " + Game.turn;
             Armor.DataContext = Game.Currentplayer;
@@ -33,45 +34,44 @@ namespace ISIP323_Anisimov_WPF
             HPTextBlock.DataContext = Game.Currentplayer;
             HPProgressBar.Value = Game.Currentplayer.HP;
             HPProgressBar.Maximum = Game.Currentplayer.MaxHP;
-            EnemyListBox.DataContext = Game.EnemyList;
+            EnemyListBox.ItemsSource = Game.EnemyList;
             
            
             
         }
-       
+
+        
         private void Attack_Click(object sender, RoutedEventArgs e)
         {
-            Game.MainGame(this);
+            if (EnemyListBox.SelectedItem != null)
+            {
+                Game.BattleChoice = true;
+            }
+            else MessageBox.Show("Выберите врага!");
         }
 
         private void Defend_Click(object sender, RoutedEventArgs e)
         {
+            if (EnemyListBox.SelectedItem != null)
+            {
+                Game.BattleChoice = false;
+            }
+            MessageBox.Show("Выберите врага!");
         }
 
-        public bool BattleChoice()
-        {
-           
-            ChoiceAtackOrDefend:
-                MessageBoxResult result = MessageBox.Show("Ваш ход! Да - Атака, Нет - Защита: ", "Важный вопрос!", MessageBoxButton.YesNo, MessageBoxImage.Information);
-                if (result == MessageBoxResult.Yes)
-                {
-                    return true;
-                }
-                else if (result == MessageBoxResult.No)
-                {
-                    return false;
-                }
-             else { Game.GameLogs.Add("Неверный ввод!"); goto ChoiceAtackOrDefend; }
-        }
 
         public void UpdateUI()
         {
             
-            HPProgressBar.Value = Game.Currentplayer.HP;    
+            HPProgressBar.Value = Game.Currentplayer.HP;
+           
         }
+
+        
 
         private void EnemyListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
         }
     }
 }
