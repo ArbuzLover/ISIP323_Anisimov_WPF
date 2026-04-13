@@ -33,7 +33,7 @@ namespace ISIP323_Anisimov_WPF
             HPTextBlock.DataContext = Game.Currentplayer;
             HPProgressBar.Value = Game.Currentplayer.HP;
             HPProgressBar.Maximum = Game.Currentplayer.MaxHP;
-            ImageEnemy.DataContext = Game.CurrentEnemy;
+            EnemyListBox.DataContext = Game.EnemyList;
             
            
             
@@ -72,7 +72,6 @@ namespace ISIP323_Anisimov_WPF
 
         private void EnemyListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
     }
 }

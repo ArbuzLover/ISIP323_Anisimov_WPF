@@ -14,13 +14,15 @@ namespace ISIP323_Anisimov_WPF.Model
     {
         static Random rnd = new Random();
 
-        public static ObservableCollection <string> GameLogs = new ObservableCollection<string> { };
+        public static ObservableCollection<string> GameLogs = new ObservableCollection<string> { };
         public static int turn = 0;
-        public static Player Currentplayer = new Player("Герой", 100, new Weapon("палец 5", 5), new Armor("Броня-кожа 5", 5));
+        public static Player Currentplayer = new Player("Герой", 100, new Weapon("палец 20",20), new Armor("Броня-кожа 10", 10));
         public static Enemy CurrentEnemy = new Goblin();
-        public static void OpenChest(Player player , MainWindow CurrentAction)
+        public static List<Enemy> EnemyList = new List<Enemy>();
+        
+        public static void OpenChest(Player player, MainWindow CurrentAction)
         {
-            
+
             int roll = rnd.Next(3);
             if (roll == 0)
                 player.Heal();
@@ -38,50 +40,59 @@ namespace ISIP323_Anisimov_WPF.Model
             }
         }
 
-        public static void Battle(Player player, Enemy enemy, MainWindow CurrentAction)
+        public static void Battle(Player player, List <Enemy> Listenemy, MainWindow CurrentAction)
         {
-            GameLogs.Add($"Вы столкнулись с {enemy.Name}!");
-            while (player.IsAlive() && enemy.IsAlive())
+            Enemy ChoiceEnemy = CurrentAction.EnemyListBox.SelectedItem as Enemy;
+            foreach (var item in Listenemy)
+            {
+                GameLogs.Add($"Вы столкнулись с{item.Name}");
+            }
+
+            while (player.IsAlive() && Listenemy.Count !=0)
             {
                 if (!player.IsFrozen)
                 {
-                   
+
                     GameLogs.Add("Ваш ход! Да - Атака, Нет - Защита: ");
 
-                        
-                        if (CurrentAction.BattleChoice() == true)
-                        {
-                            int dmg = player.Weapon.Damage - enemy.Defense;
-                            if (dmg < 1) dmg = 1;
-                            enemy.CurrentHP -= dmg;
-                            GameLogs.Add($"Вы нанесли {dmg} урона {enemy.Name}! HP врага: {enemy.CurrentHP}/{enemy.MaxHP}");
+
+                    if (CurrentAction.BattleChoice() == true)
+                    {
+                        int dmg = player.Weapon.Damage - ChoiceEnemy.Defense;
+                        if (dmg < 1) dmg = 1;
+                        ChoiceEnemy.CurrentHP -= dmg;
+                        GameLogs.Add($"Вы нанесли {dmg} урона {ChoiceEnemy.Name}! HP врага: {ChoiceEnemy.CurrentHP}/{ChoiceEnemy.MaxHP}");
                         CurrentAction.UpdateUI();
-                        }
-                        else if (CurrentAction.BattleChoice() == false)
+                    }
+                    else if (CurrentAction.BattleChoice() == false)
+                    {
+                        if (!player.TryDodge(rnd))
                         {
-                            if (!player.TryDodge(rnd))
-                            {
-                                player.BlockNextAttack = true;
-                                GameLogs.Add("Уклонение не удалось, блок уменьшит получаемый урон!");
-                                CurrentAction.UpdateUI();
+                            player.BlockNextAttack = true;
+                            GameLogs.Add("Уклонение не удалось, блок уменьшит получаемый урон!");
+                            CurrentAction.UpdateUI();
                         }
-                        }
-                        else { GameLogs.Add("Неверный ввод!"); }
+                    }
+                    else { GameLogs.Add("Неверный ввод!"); }
 
                 }
 
                 else
                 {
                     GameLogs.Add("Вы пропускаете ход из-за заморозки!");
-                   player.IsFrozen = false;
+                    player.IsFrozen = false;
                 }
-
-                if (enemy.IsAlive())
-                    enemy.AttackPlayer(player, rnd);
+                if (!ChoiceEnemy.IsAlive())
+                { Listenemy.Remove(ChoiceEnemy); }
+                else
+                {
+                    ChoiceEnemy.AttackPlayer(player, rnd);
+                }
             }
 
             if (player.IsAlive())
-                GameLogs.Add($"Выйграл нах {enemy.Name}!");
+                GameLogs.Add($"Выйграл нах!");
+                
             else
                 GameLogs.Add("Сдох нах");
         }
@@ -89,7 +100,7 @@ namespace ISIP323_Anisimov_WPF.Model
         public static void MainGame(MainWindow CurrentAction)
         {
             Player player = Currentplayer;
-            
+
 
             while (player.IsAlive())
             {
@@ -105,17 +116,49 @@ namespace ISIP323_Anisimov_WPF.Model
                 }
                 else
                 {
-                    
+
                     if (isBossTurn) { CurrentEnemy = EnemyFactory.CreateBossEnemy(); }
-                    else { CurrentEnemy = EnemyFactory.CreateEnemy(); }
+                    else
+                    {
+                        int rand = rnd.Next(3);
+                        switch (rand)
+                        {
+                            case 0:
+                                {
+                                    CurrentEnemy = EnemyFactory.CreateEnemy();
+                                    EnemyList.Add(CurrentEnemy);
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    CurrentEnemy = EnemyFactory.CreateEnemy();
+                                    EnemyList.Add(CurrentEnemy);
+                                    CurrentEnemy = EnemyFactory.CreateEnemy();
+                                    EnemyList.Add(CurrentEnemy);
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    CurrentEnemy = EnemyFactory.CreateEnemy();
+                                    EnemyList.Add(CurrentEnemy);
+                                    CurrentEnemy = EnemyFactory.CreateEnemy();
+                                    EnemyList.Add(CurrentEnemy);
+                                    CurrentEnemy = EnemyFactory.CreateEnemy();
+                                    EnemyList.Add(CurrentEnemy);
+                                    break;
+                                }
+                            default:
+                                break;
+                        }
 
-                    Battle(player, CurrentEnemy, CurrentAction);
-                    if (!player.IsAlive()) break;
+                        Battle(player, EnemyList, CurrentAction);
+                        if (!player.IsAlive()) break;
+                    }
+                    player.HP = -1;
                 }
-                player.HP = -1;
-            }
 
-            GameLogs.Add($"Конец! Вы прошли {turn} ходов.");
+                GameLogs.Add($"Конец! Вы прошли {turn} ходов.");
+            }
         }
     }
 }
