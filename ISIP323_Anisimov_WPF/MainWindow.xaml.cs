@@ -26,7 +26,6 @@ namespace ISIP323_Anisimov_WPF
         public MainWindow()
         {
             InitializeComponent();
-            Game.MainGame(this);
             Logs.ItemsSource = Game.GameLogs;
             CurrentTurn.Text = "Этаж: " + Game.turn;
             Armor.DataContext = Game.Currentplayer;
@@ -46,7 +45,11 @@ namespace ISIP323_Anisimov_WPF
             if (EnemyListBox.SelectedItem != null)
             {
                 Game.BattleChoice = true;
+
+                Enemy ChoiceEnemy = EnemyListBox.SelectedItem as Enemy;
+
             }
+
             else MessageBox.Show("Выберите врага!");
         }
 
@@ -64,7 +67,8 @@ namespace ISIP323_Anisimov_WPF
         {
             
             HPProgressBar.Value = Game.Currentplayer.HP;
-           
+            Armor.DataContext = Game.Currentplayer;
+            Weapon.DataContext = Game.Currentplayer;
         }
 
         
@@ -72,6 +76,13 @@ namespace ISIP323_Anisimov_WPF
         private void EnemyListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {   
+            StartButton.Visibility = Visibility.Collapsed;
+            Game.MainGame(this);
+            
         }
     }
 }

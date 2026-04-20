@@ -12,7 +12,7 @@ namespace ISIP323_Anisimov_WPF.Model
 {
     internal class Game
     {
-        static Random rnd = new Random();
+        public static Random rnd = new Random();
 
         public static ObservableCollection<string> GameLogs = new ObservableCollection<string> { };
         public static int turn = 0;
@@ -31,13 +31,13 @@ namespace ISIP323_Anisimov_WPF.Model
             {
                 int atk = rnd.Next(5, 50);
                 Weapon NewWeapon = new Weapon($"меч + {atk}", atk);
-                player.EquipWeapon(NewWeapon);
+                player.EquipWeapon(NewWeapon, CurrentAction);
             }
             else
             {
                 int def = rnd.Next(1, 99);
                 Armor NewArmor = new Armor($"Броня + {def}", def);
-                player.EquipArmor(NewArmor);
+                player.EquipArmor(NewArmor, CurrentAction);
             }
         }
 
@@ -158,7 +158,6 @@ namespace ISIP323_Anisimov_WPF.Model
                         //Battle(player, EnemyList, CurrentAction);
                         if (!player.IsAlive()) break;
                     }
-                    player.HP = -1;
                 }
 
                 GameLogs.Add($"Конец! Вы прошли {turn} ходов.");

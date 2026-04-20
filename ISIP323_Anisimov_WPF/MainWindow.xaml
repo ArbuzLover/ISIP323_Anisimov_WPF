@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="5">
+       
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="5*"/>
@@ -18,7 +19,8 @@
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
-
+        
+        <Button Content="НАЧАТЬ" FontSize="30" Grid.RowSpan="4" Grid.ColumnSpan="2" Panel.ZIndex="1" Click="Button_Click" x:Name="StartButton"/>
         <Label Content="Игра виагра" HorizontalAlignment="Center" FontSize="20" Grid.ColumnSpan="2"/>
 
         <Grid x:Name="TopInterface" Grid.Row="1" Grid.ColumnSpan="2">
