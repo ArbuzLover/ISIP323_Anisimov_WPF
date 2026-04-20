@@ -51,31 +51,7 @@ namespace ISIP323_Anisimov_WPF.Model
 
             while (player.IsAlive() && Listenemy.Count !=0)
             {
-                if (!player.IsFrozen)
-                {
-
-                    GameLogs.Add("Ваш ход! Да - Атака, Нет - Защита: ");
-
-
-                    if (BattleChoice == true)
-                    {
-                        int dmg = player.Weapon.Damage - ChoiceEnemy.Defense;
-                        if (dmg < 1) dmg = 1;
-                        ChoiceEnemy.CurrentHP -= dmg;
-                        GameLogs.Add($"Вы нанесли {dmg} урона {ChoiceEnemy.Name}! HP врага: {ChoiceEnemy.CurrentHP}/{ChoiceEnemy.MaxHP}");
-                        CurrentAction.UpdateUI();
-                    }
-                    else if (BattleChoice == false)
-                    {
-                        if (!player.TryDodge(rnd))
-                        {
-                            player.BlockNextAttack = true;
-                            GameLogs.Add("Уклонение не удалось, блок уменьшит получаемый урон!");
-                            CurrentAction.UpdateUI();
-                        }
-                    }
-                    else { GameLogs.Add("Неверный ввод!"); }
-
+               
                 }
 
                 else
