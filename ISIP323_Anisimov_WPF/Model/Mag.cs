@@ -14,7 +14,7 @@ namespace ISIP323_Anisimov_WPF.Model
             Name = "Маг";
             CanFreeze = true;
             FreezeChance = 15;
-            
+            ImagePath = "./Images/Mag.jpg";
         }
 
     }

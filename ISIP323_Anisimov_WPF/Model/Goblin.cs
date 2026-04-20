@@ -14,7 +14,7 @@ namespace ISIP323_Anisimov_WPF.Model
             Name = "Гоблин";
             HasCrit = true;
             CritChance = 20;
-           
+            ImagePath = "./Images/Goblin.jpg";
         }
 
     }

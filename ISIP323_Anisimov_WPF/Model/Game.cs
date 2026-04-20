@@ -26,7 +26,7 @@ namespace ISIP323_Anisimov_WPF.Model
 
             int roll = rnd.Next(3);
             if (roll == 0)
-                player.Heal();
+                player.Heal(CurrentAction);
             else if (roll == 1)
             {
                 int atk = rnd.Next(5, 50);
@@ -41,103 +41,35 @@ namespace ISIP323_Anisimov_WPF.Model
             }
         }
 
-        public static void Battle(Player player, ObservableCollection <Enemy> Listenemy, MainWindow CurrentAction)
+        private static TaskCompletionSource<bool> battleCompletionSource;
+
+        public static async Task Battle(Player player, ObservableCollection<Enemy> Listenemy, MainWindow CurrentAction)
         {
-            Enemy ChoiceEnemy = CurrentAction.EnemyListBox.SelectedItem as Enemy;
             foreach (var item in Listenemy)
             {
                 GameLogs.Add($"Вы столкнулись с {item.Name}");
             }
 
-            while (player.IsAlive() && Listenemy.Count !=0)
-            {
-               
-                }
+            // Создаем источник для ожидания
+            battleCompletionSource = new TaskCompletionSource<bool>();
 
-                else
-                {
-                    GameLogs.Add("Вы пропускаете ход из-за заморозки!");
-                    player.IsFrozen = false;
-                }
-                if (!ChoiceEnemy.IsAlive())
-                { Listenemy.Remove(ChoiceEnemy); }
-                else
-                {
-                    ChoiceEnemy.AttackPlayer(player, rnd);
-                }
-            }
+            // Ждем пока враги не закончатся
+            await battleCompletionSource.Task;
 
             if (player.IsAlive())
                 GameLogs.Add($"Выйграл нах!");
-                
             else
                 GameLogs.Add("Сдох нах");
         }
 
-        public static void MainGame(MainWindow CurrentAction)
+        // Добавьте этот метод для сигнала о том, что враги кончились
+        public static void CheckEnemiesAndContinue(Player player)
         {
-            Player player = Currentplayer;
-
-
-            while (player.IsAlive())
+            if (Game.EnemyList.Count == 0 || !player.IsAlive())
             {
-                turn++;
-                GameLogs.Add($"===== Ход {turn} =====");
-                bool isBossTurn = (turn % 10 == 0);
-                bool chestEvent = rnd.Next(2) == 0;
-
-                if (chestEvent && !isBossTurn)
-                {
-                    GameLogs.Add("Вы нашли сундук");
-                    OpenChest(player, CurrentAction);
-                }
-                else
-                {
-
-                    if (isBossTurn) { CurrentEnemy = EnemyFactory.CreateBossEnemy(); }
-                    else
-                    {
-                        int rand = rnd.Next(3);
-                        switch (rand)
-                        {
-                            case 0:
-                                {
-                                    CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    EnemyList.Add(CurrentEnemy);
-                                    
-                                    break;
-                                }
-                            case 1:
-                                {
-                                    CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    EnemyList.Add(CurrentEnemy);
-                                    CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    EnemyList.Add(CurrentEnemy);
-                                    
-                                    break;
-                                }
-                            case 2:
-                                {
-                                    CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    EnemyList.Add(CurrentEnemy);
-                                    CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    EnemyList.Add(CurrentEnemy);
-                                    CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    EnemyList.Add(CurrentEnemy);
-                                    
-                                    break;
-                                }
-                            default:
-                                break;
-                        }
-
-                        //Battle(player, EnemyList, CurrentAction);
-                        if (!player.IsAlive()) break;
-                    }
-                }
-
-                GameLogs.Add($"Конец! Вы прошли {turn} ходов.");
+                battleCompletionSource?.TrySetResult(true);
             }
         }
+
     }
 }

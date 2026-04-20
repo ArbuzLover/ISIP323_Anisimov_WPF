@@ -26,11 +26,11 @@ namespace ISIP323_Anisimov_WPF.Model
             Armor = armor;
         }
 
-        public void Heal()
+        public void Heal( MainWindow CurrentAction)
         {
             MessageBox.Show($"Вы нашли лечебное зелье и восстановили {MaxHP-HP} HP");
             HP = MaxHP;
-            
+            CurrentAction.UpdateUI();
             Game.GameLogs.Add($"Вы использовали лечебное зелье, HP восстановлено до {HP}");
         }
 

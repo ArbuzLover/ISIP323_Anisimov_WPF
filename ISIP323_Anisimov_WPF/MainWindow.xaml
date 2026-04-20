@@ -38,10 +38,19 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <ListBox x:Name="EnemyListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="0" SelectionChanged="EnemyListBox_SelectionChanged">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                
                 <ListBox.ItemTemplate>
+                    
+                    
+                    
                     <DataTemplate>
                         <StackPanel>
-                            <Image  Width="50" Height="50" Source="{Binding ImagePath}"/>
+                            <Image  Width="100" Height="100" Source="{Binding ImagePath}"/>
                             <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"/>
                             <TextBlock  Text="{Binding MaxHP}" HorizontalAlignment="Center"/>
                         </StackPanel>

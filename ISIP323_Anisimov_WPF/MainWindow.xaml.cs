@@ -22,7 +22,7 @@ namespace ISIP323_Anisimov_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-   
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,12 +34,12 @@ namespace ISIP323_Anisimov_WPF
             HPProgressBar.Value = Game.Currentplayer.HP;
             HPProgressBar.Maximum = Game.Currentplayer.MaxHP;
             EnemyListBox.ItemsSource = Game.EnemyList;
-            
-           
-            
+
+
+
         }
 
-        
+
         private void Attack_Click(object sender, RoutedEventArgs e)
         {
 
@@ -49,13 +49,13 @@ namespace ISIP323_Anisimov_WPF
                 if (!Game.Currentplayer.IsFrozen)
                 {
 
-                    
+
                     int dmg = Game.Currentplayer.Weapon.Damage - ChoiceEnemy.Defense;
                     if (dmg < 1) dmg = 1;
                     ChoiceEnemy.CurrentHP -= dmg;
                     Game.GameLogs.Add($"Вы нанесли {dmg} урона {ChoiceEnemy.Name}! HP врага: {ChoiceEnemy.CurrentHP}/{ChoiceEnemy.MaxHP}");
-                   
-                    
+
+
                 }
 
                 else
@@ -64,16 +64,18 @@ namespace ISIP323_Anisimov_WPF
                     Game.Currentplayer.IsFrozen = false;
                 }
                 if (!ChoiceEnemy.IsAlive())
-                { 
-                    Game.EnemyList.Remove(ChoiceEnemy); 
-                    if(Game.EnemyList.Count == 0)
+                {
+                    Game.EnemyList.Remove(ChoiceEnemy);
+                    if (Game.EnemyList.Count == 0)
                     {
-
+                        Game.CheckEnemiesAndContinue(Game.Currentplayer);
                     }
                 }
                 else
                 {
                     ChoiceEnemy.AttackPlayer(Game.Currentplayer, Game.rnd);
+                    if (!Game.Currentplayer.IsAlive())
+                        Game.CheckEnemiesAndContinue(Game.Currentplayer);
                 }
                 UpdateUI();
             }
@@ -84,18 +86,18 @@ namespace ISIP323_Anisimov_WPF
         private void Defend_Click(object sender, RoutedEventArgs e)
         {
             if (EnemyListBox.SelectedItem != null)
-            {   
+            {
                 Enemy ChoiceEnemy = EnemyListBox.SelectedItem as Enemy;
                 if (!Game.Currentplayer.IsFrozen)
                 {
 
 
-                    
+
 
                     if (!Game.Currentplayer.TryDodge(Game.rnd))
                     {
                         Game.Currentplayer.BlockNextAttack = true;
-                        Game.GameLogs.Add("Уклонение не удалось, блок уменьшит получаемый урон!");                       
+                        Game.GameLogs.Add("Уклонение не удалось, блок уменьшит получаемый урон!");
                     }
                 }
                 else
@@ -103,12 +105,12 @@ namespace ISIP323_Anisimov_WPF
                     Game.GameLogs.Add("Вы пропускаете ход из-за заморозки!");
                     Game.Currentplayer.IsFrozen = false;
                 }
-                    if (!ChoiceEnemy.IsAlive())
-                    { Game.EnemyList.Remove(ChoiceEnemy); }
-                    else
-                    {
-                        ChoiceEnemy.AttackPlayer(Game.Currentplayer, Game.rnd);
-                    }
+                if (!ChoiceEnemy.IsAlive())
+                { Game.EnemyList.Remove(ChoiceEnemy); }
+                else
+                {
+                    ChoiceEnemy.AttackPlayer(Game.Currentplayer, Game.rnd);
+                }
                 UpdateUI();
             }
             MessageBox.Show("Выберите врага!");
@@ -117,13 +119,13 @@ namespace ISIP323_Anisimov_WPF
 
         public void UpdateUI()
         {
-            
+
             HPProgressBar.Value = Game.Currentplayer.HP;
             Armor.DataContext = Game.Currentplayer;
             Weapon.DataContext = Game.Currentplayer;
         }
 
-        
+
 
         private void EnemyListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -131,20 +133,20 @@ namespace ISIP323_Anisimov_WPF
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {   
+        {
             StartButton.Visibility = Visibility.Collapsed;
             MainGame(this);
-            
+
         }
 
-        static void MainGame(MainWindow CurrentAction)
+        static async void MainGame(MainWindow CurrentAction)
         {
             Player player = Game.Currentplayer;
-
 
             while (player.IsAlive())
             {
                 Game.turn++;
+                CurrentAction.CurrentTurn.Text = "Этаж: " + Game.turn; // Обновляем UI
                 Game.GameLogs.Add($"===== Ход {Game.turn} =====");
                 bool isBossTurn = (Game.turn % 10 == 0);
                 bool chestEvent = Game.rnd.Next(2) == 0;
@@ -153,64 +155,55 @@ namespace ISIP323_Anisimov_WPF
                 {
                     Game.GameLogs.Add("Вы нашли сундук");
                     Game.OpenChest(player, CurrentAction);
+                    await Task.Delay(10);
                 }
                 else
                 {
+                    // Очищаем список врагов перед новым боем
+                    Game.EnemyList.Clear();
 
-                    if (isBossTurn) { Game.CurrentEnemy = EnemyFactory.CreateBossEnemy(); }
+                    if (isBossTurn)
+                    {
+                        Game.CurrentEnemy = EnemyFactory.CreateBossEnemy();
+                        Game.EnemyList.Add(Game.CurrentEnemy);
+                        Game.GameLogs.Add("БОСС ПОЯВИЛСЯ!");
+                    }
                     else
                     {
                         int rand = Game.rnd.Next(3);
                         switch (rand)
                         {
                             case 0:
-                                {
-                                    Game.CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    Game.EnemyList.Add(Game.CurrentEnemy);
-
-                                    break;
-                                }
+                                Game.CurrentEnemy = EnemyFactory.CreateEnemy();
+                                Game.EnemyList.Add(Game.CurrentEnemy);
+                                break;
                             case 1:
-                                {
-                                    Game.CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    Game.EnemyList.Add(Game.CurrentEnemy);
-                                    Game.CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    Game.EnemyList.Add(Game.CurrentEnemy);
-
-                                    break;
-                                }
+                                Game.CurrentEnemy = EnemyFactory.CreateEnemy();
+                                Game.EnemyList.Add(Game.CurrentEnemy);
+                                Game.CurrentEnemy = EnemyFactory.CreateEnemy();
+                                Game.EnemyList.Add(Game.CurrentEnemy);
+                                break;
                             case 2:
-                                {
-                                    Game.CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    Game.EnemyList.Add(Game.CurrentEnemy);
-                                    Game.CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    Game.EnemyList.Add(Game.CurrentEnemy);
-                                    Game.CurrentEnemy = EnemyFactory.CreateEnemy();
-                                    Game.EnemyList.Add(Game.CurrentEnemy);
-
-                                    break;
-                                }
-                            default:
+                                Game.CurrentEnemy = EnemyFactory.CreateEnemy();
+                                Game.EnemyList.Add(Game.CurrentEnemy);
+                                Game.CurrentEnemy = EnemyFactory.CreateEnemy();
+                                Game.EnemyList.Add(Game.CurrentEnemy);
+                                Game.CurrentEnemy = EnemyFactory.CreateEnemy();
+                                Game.EnemyList.Add(Game.CurrentEnemy);
                                 break;
                         }
+                    }
 
-                        Game.Battle(player, Game.EnemyList, CurrentAction);
-                        if (!player.IsAlive()) break;
+                    // ВЫЗОВ БИТВЫ ВЫНЕСЕН СЮДА - теперь будет всегда вызываться
+                    await Game.Battle(player, Game.EnemyList, CurrentAction);
+
+                    if (!player.IsAlive())
+                    {
+                        Game.GameLogs.Add($"Конец! Вы прошли {Game.turn} ходов.");
+                        break;
                     }
                 }
-
-                Game.GameLogs.Add($"Конец! Вы прошли {Game.turn} ходов.");
             }
         }
-
-
-
-
-
-
-
-
-
-
     }
 }
