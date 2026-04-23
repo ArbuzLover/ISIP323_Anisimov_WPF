@@ -36,26 +36,27 @@ namespace ISIP323_Anisimov_WPF.Model
 
         public void EquipWeapon(Weapon newWeapon, MainWindow CurrentAction)
         {
-            MessageBoxResult result = MessageBox.Show($"Вы нашли оружие: {newWeapon.Name} (Атака +{newWeapon.Damage})\n Ваше текущее оружие: {Weapon.Name}  (Атака + {Weapon.Damage})", "Важный вопрос!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show($"Вы нашли оружие: {newWeapon.Name} (Атака {newWeapon.Damage})\n Ваше текущее оружие: {Weapon.Name}  (Атака {Weapon.Damage})", "Важный вопрос!", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Weapon = newWeapon;
-                CurrentAction.UpdateUI();
+                CurrentAction.Weapon.Text = $"{Weapon.Name}";
                 Game.GameLogs.Add($"Вы экипировали {Weapon.Name}");
             }
             else if (result == MessageBoxResult.No)
             {
                 Game.GameLogs.Add("Вы оставили текущее оружие.");
             }
+           CurrentAction.UpdateUI();
         }
 
         public void EquipArmor(Armor newArmor, MainWindow CurrentAction)
         {
-            MessageBoxResult result = MessageBox.Show($"Вы нашли доспехи: {newArmor.Name} (Защита +{newArmor.Defense})\n Ваши текущие доспехи: {Armor.Name} (Защита +{Armor.Defense})", "Важный вопрос!", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show($"Вы нашли доспехи: {newArmor.Name} (Защита {newArmor.Defense})\n Ваши текущие доспехи: {Armor.Name} (Защита {Armor.Defense})", "Важный вопрос!", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Armor = newArmor;
-                CurrentAction.UpdateUI();
+                CurrentAction.Armor.Text = $"{Armor.Name}";
                 Game.GameLogs.Add($"Вы экипировали {Armor.Name}");
             }
             else if (result == MessageBoxResult.No)
@@ -63,6 +64,7 @@ namespace ISIP323_Anisimov_WPF.Model
                 Game.GameLogs.Add("Ничо не надел");
                 
             }
+            CurrentAction.UpdateUI();
         }
 
         public bool TryDodge(Random rnd)

@@ -30,13 +30,13 @@ namespace ISIP323_Anisimov_WPF.Model
             else if (roll == 1)
             {
                 int atk = rnd.Next(5, 50);
-                Weapon NewWeapon = new Weapon($"меч + {atk}", atk);
+                Weapon NewWeapon = new Weapon($"меч {atk}", atk);
                 player.EquipWeapon(NewWeapon, CurrentAction);
             }
             else
             {
                 int def = rnd.Next(1, 99);
-                Armor NewArmor = new Armor($"Броня + {def}", def);
+                Armor NewArmor = new Armor($"Броня {def}", def);
                 player.EquipArmor(NewArmor, CurrentAction);
             }
         }

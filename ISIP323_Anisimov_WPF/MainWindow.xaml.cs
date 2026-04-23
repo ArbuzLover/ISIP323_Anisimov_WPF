@@ -121,8 +121,8 @@ namespace ISIP323_Anisimov_WPF
         {
 
             HPProgressBar.Value = Game.Currentplayer.HP;
-            Armor.DataContext = Game.Currentplayer;
-            Weapon.DataContext = Game.Currentplayer;
+            //Armor.DataContext = Game.Currentplayer;
+            //Weapon.DataContext = Game.Currentplayer;
         }
 
 
